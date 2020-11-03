@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
     CourseSide::Logic game;
     game.fileConfig();
     std::shared_ptr<Students::City> Tampere(new Students::City());
-    Tampere->setClock(QTime::currentTime());
     game.takeCity(Tampere);
     game.finalizeGameStart();
     return a.exec();
