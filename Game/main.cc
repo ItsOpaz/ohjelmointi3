@@ -21,10 +21,11 @@ int main(int argc, char *argv[])
 
     QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
     QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
-    Tampere->setBackground(smallMap, bigMap);
 
-    MainWindow mw;
+    Students::MainWindow mw;
     mw.show();
+    mw.setPicture(bigMap);
+
 
     return a.exec();
 }

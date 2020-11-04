@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>557</height>
+    <width>1301</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,17 +19,17 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>500</width>
-      <height>500</height>
+      <width>1095</width>
+      <height>592</height>
      </rect>
     </property>
    </widget>
    <widget class="QLCDNumber" name="lcdPoints">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>1120</x>
       <y>10</y>
-      <width>241</width>
+      <width>151</width>
       <height>51</height>
      </rect>
     </property>
@@ -37,9 +37,9 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>130</y>
-      <width>241</width>
+      <x>1120</x>
+      <y>80</y>
+      <width>151</width>
       <height>381</height>
      </rect>
     </property>
@@ -66,7 +66,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1301</width>
      <height>20</height>
     </rect>
    </property>
