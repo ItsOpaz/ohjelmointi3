@@ -1,4 +1,6 @@
 #include "city.h"
+#include "mainwindow.h"
+#include "QDebug"
 
 namespace Students
 {
