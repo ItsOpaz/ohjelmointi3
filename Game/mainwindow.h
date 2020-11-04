@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "graphics/simplemainwindow.hh"
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -19,6 +20,9 @@ public:
 private:
     Ui::MainWindow *ui;
 };
+
+
+
 
 
 

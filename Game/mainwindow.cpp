@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "graphics/simplemainwindow.hh"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     SimpleMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -13,4 +14,5 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
