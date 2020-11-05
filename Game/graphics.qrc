@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/graphics">
+        <file>graphics/passenger.svg</file>
+        <file>graphics/saab1.svg</file>
+        <file>graphics/saab2.svg</file>
+        <file>graphics/saab3.svg</file>
+        <file>graphics/saab4.svg</file>
+        <file>graphics/saab5.svg</file>
+        <file>graphics/saab6.svg</file>
+    </qresource>
+</RCC>

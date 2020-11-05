@@ -42,10 +42,4 @@ FORMS += \
     mainwindow.ui
 
 RESOURCES += \
-    saab1.svg \
-    saab2.svg \
-    saab3.svg \
-    saab4.svg \
-    saab5.svg \
-    saab6.svg \
-    passenger.svg
+    graphics.qrc
