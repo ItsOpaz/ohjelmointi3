@@ -23,17 +23,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-} //namespace
-
-
-
-void Students::MainWindow::on_pushButton_menu_clicked()
+void MainWindow::on_pushButton_menu_clicked()
 {
     qDebug() << "menu clicked";
 }
 
-void Students::MainWindow::setPicture(QImage &img)
+void MainWindow::setPicture(QImage &img)
 {
     map->setBackgroundBrush(img);
 }
-
+}

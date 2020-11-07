@@ -11,16 +11,17 @@ City::City():
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-
+    background_ = bigbackground;
 }
 
 void City::setClock(QTime clock)
 {
-
+    clock_ = clock;
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
+    stops_.push_back(stop);
 
 }
 
@@ -31,12 +32,14 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-
+    actors_.push_back(newactor);
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-
+    if (std::find(actors_.begin(), actors_.end(), actor)!=actors_.end()){
+        actor->remove();
+    }
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -61,8 +64,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 bool City::isGameOver() const
 {
-    return false;
-
+    return gameStatus_;
 }
 }
 
