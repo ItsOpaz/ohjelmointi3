@@ -7,7 +7,8 @@ CONFIG += c++14
 
 SOURCES += \
     city.cpp \
-    main.cc
+    main.cc \
+    mainwindow.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -34,4 +35,11 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
-    city.h
+    city.h \
+    mainwindow.h
+
+FORMS += \
+    mainwindow.ui
+
+RESOURCES += \
+    graphics.qrc
