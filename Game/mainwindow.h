@@ -22,6 +22,7 @@ public slots:
     void setPicture(QImage &img);
 private slots:
     void on_pushButton_menu_clicked();
+    void update_clock();
 
 private:
     Ui::MainWindow *ui;
