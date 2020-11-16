@@ -14,7 +14,7 @@ public:
     void StartGame();
 private:
     std::unique_ptr<CourseSide::Logic> logic_;
-    std::shared_ptr<Interface::ICity> city_;
+    std::shared_ptr<Students::City> city_;
     std::unique_ptr<Students::MainWindow> mainwindow_;
 };
 

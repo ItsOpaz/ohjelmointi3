@@ -22,7 +22,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+}
+
+void MainWindow::drawStops(std::vector<std::shared_ptr<Interface::IStop> > stops)
+{
+    for (auto stop : stops){
+        QGraphicsPixmapItem *stoppista = new QGraphicsPixmapItem(QString(":/graphics/graphics/passenger.svg"));
+        int x = stop->getLocation().giveX();
+        int y = 500 - stop->getLocation().giveY();
+        stoppista->setScale(.05);
+        stoppista->setPos(x,y);
+        map->addItem(stoppista);
+    }
+
+}
+
+void MainWindow::drawBusses()
+{
+
 }
 
 void MainWindow::on_pushButton_menu_clicked()
@@ -40,7 +57,7 @@ void MainWindow::update_clock()
 
 }
 
-void MainWindow::setPicture(QImage &img)
+void MainWindow::setPicture(QImage img)
 {
     map->setBackgroundBrush(img);
 }

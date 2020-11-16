@@ -1,5 +1,8 @@
 #include "creategame.h"
 
+QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
+QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
+
 namespace Students
 {
 CreateGame::CreateGame():
@@ -10,12 +13,13 @@ CreateGame::CreateGame():
     logic_->fileConfig();
     logic_->takeCity(city_);
     logic_->finalizeGameStart();
+    city_->setBackground(smallMap, bigMap);
 }
 
 void CreateGame::StartGame()
 {
     mainwindow_->show();
-    QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-    mainwindow_->setPicture(bigMap);
+    mainwindow_->setPicture(city_->getBackground());
+    mainwindow_->drawStops(city_->getStops());
 }
 }

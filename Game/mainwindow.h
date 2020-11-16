@@ -19,17 +19,17 @@ class MainWindow : public CourseSide::SimpleMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void drawStops(std::vector<std::shared_ptr<Interface::IStop> >);
+    void drawBusses();
 
 public slots:
-    void setPicture(QImage &img);
+    void setPicture(QImage img);
 private slots:
     void on_pushButton_menu_clicked();
     void update_clock();
 
 private:
-    Ui::MainWindow *ui;
-    std::shared_ptr<Interface::ICity> city_;
-    std::shared_ptr<CourseSide::Logic> logic_;
+    std::shared_ptr<Ui::MainWindow> ui;
     QGraphicsScene *map;
 };
 }
