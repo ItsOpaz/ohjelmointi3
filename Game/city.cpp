@@ -66,6 +66,26 @@ bool City::isGameOver() const
 {
     return gameStatus_;
 }
+
+std::vector<std::shared_ptr<Interface::IActor> > City::getActors()
+{
+    return actors_;
+}
+
+std::vector<std::shared_ptr<Interface::IStop> > City::getStops()
+{
+    return stops_;
+}
+
+QImage City::getBackground()
+{
+    return background_;
+}
+
+QTime City::getTime()
+{
+    return clock_;
+}
 }
 
 

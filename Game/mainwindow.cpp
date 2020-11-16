@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "graphics/simplemainwindow.hh"
+#include "core/logic.hh"
 #include "QImage"
 #include "QDebug"
 #include "QTime"
@@ -17,11 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new QGraphicsScene(this);
     ui->gameWindow->setScene(map);
     map->setSceneRect(0,0,1095,592);
-
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::update_clock);
-    timer->start(1000);
-    update_clock();
 }
 
 MainWindow::~MainWindow()

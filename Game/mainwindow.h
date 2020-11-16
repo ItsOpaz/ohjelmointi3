@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "graphics/simplemainwindow.hh"
+#include "city.h"
+#include "core/logic.hh"
 
 
 namespace Ui {
@@ -26,6 +28,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    std::shared_ptr<Interface::ICity> city_;
+    std::shared_ptr<CourseSide::Logic> logic_;
     QGraphicsScene *map;
 };
 }

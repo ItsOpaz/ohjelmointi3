@@ -7,6 +7,7 @@ CONFIG += c++14
 
 SOURCES += \
     city.cpp \
+    creategame.cpp \
     main.cc \
     mainwindow.cpp
 
@@ -36,6 +37,7 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     city.h \
+    creategame.h \
     mainwindow.h
 
 FORMS += \

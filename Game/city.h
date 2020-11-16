@@ -25,6 +25,10 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
+    std::vector<std::shared_ptr<Interface::IActor> > getActors();
+    std::vector<std::shared_ptr<Interface::IStop> > getStops();
+    QImage getBackground();
+    QTime getTime();
 private:
     QTime clock_;
     QImage background_;
