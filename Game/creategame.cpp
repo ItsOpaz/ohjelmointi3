@@ -21,5 +21,6 @@ void CreateGame::StartGame()
     mainwindow_->show();
     mainwindow_->setPicture(city_->getBackground());
     mainwindow_->drawStops(city_->getStops());
+    mainwindow_->drawBusses(city_->getActors());
 }
 }

@@ -20,7 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void drawStops(std::vector<std::shared_ptr<Interface::IStop> >);
-    void drawBusses();
+    void drawBusses( std::vector<std::shared_ptr<Interface::IActor> >);
 
 public slots:
     void setPicture(QImage img);

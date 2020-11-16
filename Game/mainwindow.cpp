@@ -37,9 +37,17 @@ void MainWindow::drawStops(std::vector<std::shared_ptr<Interface::IStop> > stops
 
 }
 
-void MainWindow::drawBusses()
+void MainWindow::drawBusses( std::vector<std::shared_ptr<Interface::IActor> > actors)
 {
-
+    for (auto actor : actors){
+        int saab = rand()%5 + 1;
+        QGraphicsPixmapItem *stoppista = new QGraphicsPixmapItem(QString(":/graphics/graphics/saab1.svg"));
+        int x = actor->giveLocation().giveX();
+        int y = 500 - actor->giveLocation().giveY();
+        stoppista->setScale(.05);
+        stoppista->setPos(x,y);
+        map->addItem(stoppista);
+    }
 }
 
 void MainWindow::on_pushButton_menu_clicked()
