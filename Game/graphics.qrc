@@ -7,5 +7,6 @@
         <file>graphics/saab4.svg</file>
         <file>graphics/saab5.svg</file>
         <file>graphics/saab6.svg</file>
+        <file>graphics/busstop.svg</file>
     </qresource>
 </RCC>

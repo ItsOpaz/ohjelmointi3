@@ -6,10 +6,11 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    betteractoritem.cpp \
+    bettermainwindow.cpp \
     city.cpp \
     creategame.cpp \
-    main.cc \
-    mainwindow.cpp
+    main.cc
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -36,12 +37,13 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
+    betteractoritem.h \
+    bettermainwindow.h \
     city.h \
-    creategame.h \
-    mainwindow.h
+    creategame.h
 
 FORMS += \
-    mainwindow.ui
+    bettermainwindow.ui
 
 RESOURCES += \
     graphics.qrc

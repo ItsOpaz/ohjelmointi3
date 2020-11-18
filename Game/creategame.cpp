@@ -8,9 +8,10 @@ namespace Students
 CreateGame::CreateGame():
     logic_(new CourseSide::Logic),
     city_(new Students::City),
-    mainwindow_(new Students::MainWindow)
+    mainwindow_(new Students::BetterMainWindow)
 {
     logic_->fileConfig();
+    city_->takeMainWindow(mainwindow_);
     logic_->takeCity(city_);
     logic_->finalizeGameStart();
     city_->setBackground(smallMap, bigMap);
@@ -18,9 +19,6 @@ CreateGame::CreateGame():
 
 void CreateGame::StartGame()
 {
-    mainwindow_->show();
-    mainwindow_->setPicture(city_->getBackground());
-    mainwindow_->drawStops(city_->getStops());
-    mainwindow_->drawBusses(city_->getActors());
+    city_->startGame();
 }
 }

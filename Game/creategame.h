@@ -3,7 +3,7 @@
 
 #include "core/logic.hh"
 #include "city.h"
-#include "mainwindow.h"
+#include "bettermainwindow.h"
 
 namespace Students {
 
@@ -15,7 +15,7 @@ public:
 private:
     std::unique_ptr<CourseSide::Logic> logic_;
     std::shared_ptr<Students::City> city_;
-    std::unique_ptr<Students::MainWindow> mainwindow_;
+    std::shared_ptr<Students::BetterMainWindow> mainwindow_;
 };
 
 }

@@ -2,6 +2,7 @@
 #define CITY_H
 
 #include "interfaces/icity.hh"
+#include "bettermainwindow.h"
 
 #include <QTime>
 
@@ -25,15 +26,13 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
-    std::vector<std::shared_ptr<Interface::IActor> > getActors();
-    std::vector<std::shared_ptr<Interface::IStop> > getStops();
-    QImage getBackground();
-    QTime getTime();
+    bool takeMainWindow(std::shared_ptr<Students::BetterMainWindow>);
 private:
     QTime clock_;
     QImage background_;
     std::vector<std::shared_ptr<Interface::IStop> > stops_;
     std::vector<std::shared_ptr<Interface::IActor> > actors_;
+    std::shared_ptr<Students::BetterMainWindow> mw_;
     bool gameStatus_ = false;
 };
 }
