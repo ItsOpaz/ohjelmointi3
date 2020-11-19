@@ -31,6 +31,11 @@ private slots:
 
     void on_radioButton_hard_clicked();
 
+signals:
+    void nameSet(QString name);
+    void difficultySet(QString difficuty);
+
+
 private:
     Ui::startwindow *ui;
     QString difficulty_;

@@ -1,6 +1,7 @@
 #include "bettermainwindow.h"
 #include "ui_bettermainwindow.h"
 #include <QDebug>
+#include "startwindow.h"
 
 const int PADDING = 10;
 
@@ -10,6 +11,10 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::BetterMainWindow)
 {
+
+    Students::startwindow sw(this);
+    connect(&sw, &startwindow::nameSet, this, &BetterMainWindow::set_playername);
+
     ui->setupUi(this);
     ui->gameView->setFixedSize(width_, height_);
     ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
@@ -26,6 +31,8 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     timer->start(tick_);
+    sw.exec();
+
 }
 
 BetterMainWindow::~BetterMainWindow()
@@ -77,5 +84,11 @@ void BetterMainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
     emit gameStarted();
+}
+
+void BetterMainWindow::set_playername(QString name)
+{
+    playerName_ = name;
+    qDebug() << playerName_;
 }
 }

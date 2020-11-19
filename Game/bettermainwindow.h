@@ -40,12 +40,14 @@ signals:
 
 private slots:
     void on_startButton_clicked();
+    void set_playername(QString name);
 
 private:
     Ui::BetterMainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
     QVector<BetterActorItem*> actors_;
+    QString playerName_;
 
     int width_ = 1095; //pxls
     int height_ = 592;

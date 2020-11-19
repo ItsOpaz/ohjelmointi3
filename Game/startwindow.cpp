@@ -10,6 +10,7 @@ startwindow::startwindow(QWidget *parent) :
     ui(new Ui::startwindow)
 {
     ui->setupUi(this);
+    ui->pushButton->setDisabled(true);
 }
 
 startwindow::~startwindow()
@@ -20,6 +21,7 @@ startwindow::~startwindow()
 void startwindow::setDifficulty(QString difficulty)
 {
     difficulty_ = difficulty;
+    ui->pushButton->setDisabled(false);
     qDebug() << difficulty_;
 }
 
@@ -32,6 +34,8 @@ void startwindow::on_lineEdit_playername_textChanged(const QString &arg1)
 
 void Students::startwindow::on_pushButton_clicked()
 {
+    emit nameSet(playerName_);
+    emit difficultySet(difficulty_);
     accept();
 }
 
