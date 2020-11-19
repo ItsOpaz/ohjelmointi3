@@ -10,7 +10,8 @@ SOURCES += \
     bettermainwindow.cpp \
     city.cpp \
     creategame.cpp \
-    main.cc
+    main.cc \
+    startwindow.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -40,10 +41,12 @@ HEADERS += \
     betteractoritem.h \
     bettermainwindow.h \
     city.h \
-    creategame.h
+    creategame.h \
+    startwindow.h
 
 FORMS += \
-    bettermainwindow.ui
+    bettermainwindow.ui \
+    startwindow.ui
 
 RESOURCES += \
     graphics.qrc
