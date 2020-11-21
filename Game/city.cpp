@@ -4,9 +4,7 @@
 #include <typeinfo>
 #include "actors/nysse.hh"
 #include <iostream>
-
-int MAPHEIGHT_ADJUST = 550;
-int MAPWIDTH_ADJUST = 400;
+#include "character.h"
 
 namespace Students
 {
@@ -33,21 +31,19 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-    for(auto actor: actors_){
-        int type = 0;
-        if(std::dynamic_pointer_cast<CourseSide::Nysse>(actor) == nullptr){
-            type = 1;
-        }
-        int x = MAPWIDTH_ADJUST - actor->giveLocation().giveX();
-        int y = MAPHEIGHT_ADJUST - actor->giveLocation().giveY();
-        mw_->addActor(x, y, type);
-    }
+    mw_->addCharacter();
     mw_->show();
-
 }
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
+    int type = 0;
+    if(std::dynamic_pointer_cast<CourseSide::Nysse>(newactor) == nullptr){
+        type = 1;
+    }
+    int x = newactor->giveLocation().giveX();
+    int y = 500 - newactor->giveLocation().giveY();
+    mw_->addActor(x, y, type);
     actors_.push_back(newactor);
 }
 
@@ -69,8 +65,8 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    int x = MAPWIDTH_ADJUST - actor->giveLocation().giveX();
-    int y = MAPHEIGHT_ADJUST - actor->giveLocation().giveY();
+    int x = actor->giveLocation().giveX();
+    int y = 500 - actor->giveLocation().giveY();
     std::vector<std::shared_ptr<Interface::IActor>>::iterator it = std::find(actors_.begin(), actors_.end(), actor);
     mw_->updateCoords(std::distance(actors_.begin(), it), x, y);
 }

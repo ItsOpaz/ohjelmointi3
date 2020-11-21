@@ -15,7 +15,7 @@ public:
     virtual ~BetterActorItem();
     void setCoord(int x, int y);
 
-private:
+protected:
     int x_;
     int y_;
     int type_;

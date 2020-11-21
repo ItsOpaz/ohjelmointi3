@@ -34,6 +34,7 @@ public:
     void addStop(std::shared_ptr<Interface::IStop>);
     void updateCoords(int distance, int x, int y);
     void setPicture(QImage &img);
+    void addCharacter();
 
 signals:
     void gameStarted();

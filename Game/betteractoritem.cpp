@@ -3,17 +3,27 @@
 #include "interfaces/ipassenger.hh"
 #include "interfaces/ivehicle.hh"
 
+#include <QDebug>
+
 namespace Students {
 
 BetterActorItem::BetterActorItem(int x, int y, int type)
     :x_(x), y_(y), type_(type)
 {
     setPos(mapToParent(x_, y_ ));
-    if(type == 1){
+    switch (type_) {
+    case 1:
         setPixmap(QString(":/graphics/graphics/passenger.svg"));
         setScale(.05);
-    }else{
-        setPixmap(QString(":/graphics/graphics/saab1.svg"));
+        break;
+    case 2:
+        setPixmap(QString(":/graphics/graphics/helicopter.svg"));
+        setScale(.05);
+        break;
+    default:
+        int randInt = rand()%5+1;
+        qDebug()<<randInt;
+        setPixmap(QString(":/graphics/graphics/saab%1.svg").arg(randInt));
         setScale(.1);
     }
 }

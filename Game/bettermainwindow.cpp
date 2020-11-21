@@ -2,6 +2,7 @@
 #include "ui_bettermainwindow.h"
 #include <QDebug>
 #include "startwindow.h"
+#include "character.h"
 
 const int PADDING = 10;
 
@@ -77,6 +78,12 @@ void BetterMainWindow::updateCoords(int distance, int x, int y)
 void BetterMainWindow::setPicture(QImage &img)
 {
     map->setBackgroundBrush(img);
+}
+
+void BetterMainWindow::addCharacter()
+{
+    Character* player = new Character(100, 100, 2);
+    map->addItem(player);
 }
 
 

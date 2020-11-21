@@ -8,5 +8,6 @@
         <file>graphics/saab5.svg</file>
         <file>graphics/saab6.svg</file>
         <file>graphics/busstop.svg</file>
+        <file>graphics/helicopter.svg</file>
     </qresource>
 </RCC>
