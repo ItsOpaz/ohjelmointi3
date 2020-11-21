@@ -4,8 +4,6 @@
 #include "startwindow.h"
 #include "character.h"
 
-const int PADDING = 10;
-
 namespace Students {
 
 BetterMainWindow::BetterMainWindow(QWidget *parent) :
@@ -62,8 +60,8 @@ void BetterMainWindow::addActor(int x, int y, int type)
 void BetterMainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     QGraphicsPixmapItem *stoppista = new QGraphicsPixmapItem(QString(":/graphics/graphics/busstop.svg"));
-    int x = stop->getLocation().giveX();
-    int y = 500 - stop->getLocation().giveY();
+    int x = stop->getLocation().giveX() + X_ADJUST;
+    int y = Y_ADJUST - stop->getLocation().giveY();
     stoppista->setScale(.2);
     stoppista->setPos(x,y);
     map->addItem(stoppista);
@@ -84,6 +82,12 @@ void BetterMainWindow::addCharacter()
 {
     Character* player = new Character(100, 100, 2);
     map->addItem(player);
+}
+
+void BetterMainWindow::removeItem(int distance)
+{
+//    qDebug()<<actors_;
+//    actors_.erase(actors_.begin()+distance-2);
 }
 
 

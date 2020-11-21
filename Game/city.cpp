@@ -41,16 +41,18 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
     if(std::dynamic_pointer_cast<CourseSide::Nysse>(newactor) == nullptr){
         type = 1;
     }
-    int x = newactor->giveLocation().giveX();
-    int y = 500 - newactor->giveLocation().giveY();
+    int x = newactor->giveLocation().giveX() + X_ADJUST;
+    int y = Y_ADJUST - newactor->giveLocation().giveY();
     mw_->addActor(x, y, type);
     actors_.push_back(newactor);
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    std::remove(actors_.begin(), actors_.end(), actor);
-    actor->remove();
+//    std::remove(actors_.begin(), actors_.end(), actor);
+//    actor->remove();
+//    std::vector<std::shared_ptr<Interface::IActor>>::iterator it = std::find(actors_.begin(), actors_.end(), actor);
+//    mw_->removeItem(std::distance(actors_.begin(), it));
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -65,10 +67,14 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    int x = actor->giveLocation().giveX();
-    int y = 500 - actor->giveLocation().giveY();
+    if(actor->isRemoved()){
+        removeActor(actor);
+    }else{
+    int x = actor->giveLocation().giveX() + X_ADJUST;
+    int y = Y_ADJUST - actor->giveLocation().giveY();
     std::vector<std::shared_ptr<Interface::IActor>>::iterator it = std::find(actors_.begin(), actors_.end(), actor);
     mw_->updateCoords(std::distance(actors_.begin(), it), x, y);
+    }
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const

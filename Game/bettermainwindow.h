@@ -13,6 +13,14 @@
 #include <QVector>
 #include <map>
 
+//for big map X_ADJUST 353 and Y_ADJUST 444
+//for small map X_ADJUST 0 and Y_ADJUST 500
+const int X_ADJUST = 353;
+const int Y_ADJUST = 444;
+
+const int PADDING = 10;
+
+
 namespace Ui {
 class BetterMainWindow;
 }
@@ -35,6 +43,7 @@ public:
     void updateCoords(int distance, int x, int y);
     void setPicture(QImage &img);
     void addCharacter();
+    void removeItem(int distance);
 
 signals:
     void gameStarted();
