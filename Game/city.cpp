@@ -2,7 +2,6 @@
 #include "bettermainwindow.h"
 #include "QDebug"
 #include <typeinfo>
-#include "actors/nysse.hh"
 #include <iostream>
 #include "character.h"
 
@@ -25,7 +24,6 @@ void City::setClock(QTime clock)
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-    stops_.push_back(stop);
     mw_->addStop(stop);
 }
 
@@ -37,49 +35,39 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-    int type = 0;
-    if(std::dynamic_pointer_cast<CourseSide::Nysse>(newactor) == nullptr){
-        type = 1;
-    }
-    int x = newactor->giveLocation().giveX() + X_ADJUST;
-    int y = Y_ADJUST - newactor->giveLocation().giveY();
-    mw_->addActor(x, y, type);
-    actors_.push_back(newactor);
+    mw_->addActor(newactor);
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-//    std::remove(actors_.begin(), actors_.end(), actor);
-//    actor->remove();
-//    std::vector<std::shared_ptr<Interface::IActor>>::iterator it = std::find(actors_.begin(), actors_.end(), actor);
-//    mw_->removeItem(std::distance(actors_.begin(), it));
+    mw_->removeItem(actor);
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-
+    mw_->removeItem(actor);
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
-
+    return mw_->checkActor(actor);
 }
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    if(actor->isRemoved()){
-        removeActor(actor);
-    }else{
-    int x = actor->giveLocation().giveX() + X_ADJUST;
-    int y = Y_ADJUST - actor->giveLocation().giveY();
-    std::vector<std::shared_ptr<Interface::IActor>>::iterator it = std::find(actors_.begin(), actors_.end(), actor);
-    mw_->updateCoords(std::distance(actors_.begin(), it), x, y);
-    }
+    mw_->updateCoords(actor);
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
-
+    std::vector<std::shared_ptr<Interface::IActor>> nearby;
+    auto allActors = mw_->getActors();
+    for (auto actor : allActors){
+        if(actor->giveLocation().isClose(loc)){
+            nearby.push_back(actor);
+        }
+    }
+    return nearby;
 }
 
 bool City::isGameOver() const

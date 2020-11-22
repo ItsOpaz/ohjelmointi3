@@ -30,8 +30,6 @@ public:
 private:
     QTime clock_;
     QImage background_;
-    std::vector<std::shared_ptr<Interface::IStop> > stops_;
-    std::vector<std::shared_ptr<Interface::IActor> > actors_;
     std::shared_ptr<Students::BetterMainWindow> mw_;
     bool gameStatus_ = false;
 };

@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "startwindow.h"
 #include "character.h"
+#include "actors/nysse.hh"
 
 namespace Students {
 
@@ -50,10 +51,17 @@ void BetterMainWindow::setTick(int t)
     tick_ = t;
 }
 
-void BetterMainWindow::addActor(int x, int y, int type)
+void BetterMainWindow::addActor(std::shared_ptr<Interface::IActor> newActor)
 {
+    int type = 0;
+    if(std::dynamic_pointer_cast<CourseSide::Nysse>(newActor) == nullptr){
+        type = 1;
+    }
+    int x = newActor->giveLocation().giveX() + X_ADJUST;
+    int y = Y_ADJUST - newActor->giveLocation().giveY();
+
     BetterActorItem* nActor = new BetterActorItem(x, y, type);
-    actors_.push_back(nActor);
+    actorpairs_.push_back(std::make_pair(nActor, newActor));
     map->addItem(nActor);
 }
 
@@ -65,12 +73,24 @@ void BetterMainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
     stoppista->setScale(.2);
     stoppista->setPos(x,y);
     map->addItem(stoppista);
-
 }
 
-void BetterMainWindow::updateCoords(int distance, int x, int y)
+
+
+void BetterMainWindow::updateCoords(std::shared_ptr<Interface::IActor> actor)
 {
-    actors_[distance]->setCoord(x,y);
+    auto it = std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;});
+    int x = it->second->giveLocation().giveX() + X_ADJUST;
+    int y = Y_ADJUST - it->second->giveLocation().giveY();
+    it->first->setCoord(x, y);
+    if(std::dynamic_pointer_cast<CourseSide::Passenger>(actor)){
+        std::shared_ptr<CourseSide::Passenger> passenger = std::dynamic_pointer_cast<CourseSide::Passenger>(actor);
+        if(passenger->isInVehicle()){
+            it->first->hide();
+        }else{
+            it->first->show();
+        }
+    }
 }
 
 void BetterMainWindow::setPicture(QImage &img)
@@ -84,10 +104,26 @@ void BetterMainWindow::addCharacter()
     map->addItem(player);
 }
 
-void BetterMainWindow::removeItem(int distance)
+void BetterMainWindow::removeItem(std::shared_ptr<Interface::IActor> actor)
 {
-//    qDebug()<<actors_;
-//    actors_.erase(actors_.begin()+distance-2);
+    auto it = std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;});
+    it->second->remove();
+    map->removeItem(it->first);
+    actorpairs_.erase(it);
+}
+
+bool BetterMainWindow::checkActor(std::shared_ptr<Interface::IActor> actor)
+{
+    return (std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;}) != actorpairs_.end());
+}
+
+std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
+{
+    std::vector<std::shared_ptr<Interface::IActor>> actors;
+    for(auto item : actorpairs_){
+        actors.push_back(item.second);
+    }
+    return actors;
 }
 
 

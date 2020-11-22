@@ -38,12 +38,14 @@ public:
     void setSize(int w, int h);
     void setTick(int t);
 
-    void addActor(int x, int y, int type);
+    void addActor(std::shared_ptr<Interface::IActor>);
     void addStop(std::shared_ptr<Interface::IStop>);
-    void updateCoords(int distance, int x, int y);
+    void updateCoords(std::shared_ptr<Interface::IActor>);
     void setPicture(QImage &img);
     void addCharacter();
-    void removeItem(int distance);
+    void removeItem(std::shared_ptr<Interface::IActor>);
+    bool checkActor(std::shared_ptr<Interface::IActor>);
+    std::vector<std::shared_ptr<Interface::IActor>> getActors();
 
 signals:
     void gameStarted();
@@ -56,7 +58,7 @@ private:
     Ui::BetterMainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    QVector<BetterActorItem*> actors_;
+    QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
     QString playerName_;
 
     int width_ = 1095; //pxls
