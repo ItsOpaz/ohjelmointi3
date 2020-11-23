@@ -4,6 +4,7 @@
 #include "startwindow.h"
 #include "character.h"
 #include "actors/nysse.hh"
+#include "creategame.h"
 
 namespace Students {
 
@@ -11,27 +12,32 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::BetterMainWindow)
 {
-
     Students::startwindow sw(this);
-    connect(&sw, &startwindow::nameSet, this, &BetterMainWindow::set_playername);
+    if (sw.exec()) {
+        connect(&sw, &startwindow::nameSet, this, &BetterMainWindow::set_playername);
 
-    ui->setupUi(this);
-    ui->gameView->setFixedSize(width_, height_);
-    ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
+        ui->setupUi(this);
+        ui->gameView->setFixedSize(width_, height_);
+        ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
 
-    ui->startButton->move(width_ + PADDING , PADDING);
+        ui->startButton->move(width_ + PADDING , PADDING);
 
-    map = new QGraphicsScene(this);
-    ui->gameView->setScene(map);
-    map->setSceneRect(0,0,width_,height_);
+        map = new QGraphicsScene(this);
+        ui->gameView->setScene(map);
+        map->setSceneRect(0,0,width_,height_);
 
-    resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
+        resize(minimumSizeHint());
+        //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
-    timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    timer->start(tick_);
-    sw.exec();
+        timer = new QTimer(this);
+        connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+        timer->start(tick_);
+    }
+    else{
+        close();
+    }
+
+
 
 }
 
@@ -129,8 +135,8 @@ std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
 
 void BetterMainWindow::on_startButton_clicked()
 {
-    qDebug() << "Start clicked";
-    emit gameStarted();
+    qDebug() << "Pause clicked";
+    timer->stop();
 }
 
 void BetterMainWindow::set_playername(QString name)

@@ -10,7 +10,7 @@ namespace Students {
 BetterActorItem::BetterActorItem(int x, int y, int type)
     :x_(x), y_(y), type_(type)
 {
-    setPos(mapToParent(x_, y_ ));
+    setPos(x_, y_ );
     switch (type_) {
     case 1:
         setPixmap(QString(":/graphics/graphics/passenger.svg"));
@@ -22,7 +22,6 @@ BetterActorItem::BetterActorItem(int x, int y, int type)
         break;
     default:
         int randInt = rand()%5+1;
-        qDebug()<<randInt;
         setPixmap(QString(":/graphics/graphics/saab%1.svg").arg(randInt));
         setScale(.1);
     }

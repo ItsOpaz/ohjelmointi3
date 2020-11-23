@@ -19,6 +19,7 @@ public:
     ~startwindow();
 
     void setDifficulty (QString difficulty);
+    bool check_name(QString name);
 
 private slots:
     void on_lineEdit_playername_textChanged(const QString &arg1);
@@ -31,15 +32,21 @@ private slots:
 
     void on_radioButton_hard_clicked();
 
+    void on_pushButton_cancel_clicked();
+
 signals:
     void nameSet(QString name);
     void difficultySet(QString difficuty);
 
 
 private:
+
+
     Ui::startwindow *ui;
-    QString difficulty_;
+    QString difficulty_ = NULL;
     QString playerName_;
+    std::vector<QChar> illegals_ = {',', '/', ' '};
+
 };
 }
 #endif // STARTWINDOW_H
