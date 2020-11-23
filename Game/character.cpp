@@ -7,14 +7,18 @@ namespace Students {
 Character::Character()
     :direction_(1)
 {
-    setPixmap(QString(":/graphics/graphics/helicopter.svg"));
-    setScale(.05);
+    //helicopter is set to front
+    setZValue(1);
+    rotorPhase();
+    setScale(.2);
+    //helicopter originpoint is set to center of boundingrect so rotating helicopter works
     setTransformOriginPoint(this->boundingRect().center());
-    setPos( 200,-100);
+    setPos(mapToParent(0, 0));
 }
 
 void Character::move()
 {
+    rotorPhase();
     switch (direction_) {
     case 1:
         moveBy(0, -1);
@@ -49,9 +53,35 @@ void Character::setDirection(int direction)
 
 void Character::crash()
 {
-    if (this->pos().rx() < -347 || this->pos().rx() > 738 || this->pos().ry() < -403 || this->pos().ry() > 184){
-        qDebug()<<"meni heti vituiks";
+//    if (this->pos().rx() < -347 || this->pos().rx() > 738 || this->pos().ry() < -403 || this->pos().ry() > 184){
+//        qDebug()<<"meni heti vituiks";
+//    }
+}
+
+void Character::rotorPhase()
+{
+    //sets helicopter picture for every move so helicopter seems like it's flying
+    switch (phase_) {
+    case 1:
+        setPixmap(QString(":/graphics/graphics/helicopter_phase1.svg"));
+        break;
+    case 2:
+        setPixmap(QString(":/graphics/graphics/helicopter_phase2.svg"));
+        break;
+    case 3:
+        setPixmap(QString(":/graphics/graphics/helicopter_phase3.svg"));
+        break;
+    default:
+        setPixmap(QString(":/graphics/graphics/helicopter_phase4.svg"));
+        phase_ = 0;
+        break;
     }
+    phase_ += 1;
+}
+
+Bomb *Character::dropBomb()
+{
+    return new Bomb(this->pos(), direction());
 }
 
 

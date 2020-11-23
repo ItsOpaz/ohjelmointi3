@@ -10,18 +10,15 @@ namespace Students {
 BetterActorItem::BetterActorItem(int x, int y, int type)
     :x_(x), y_(y), type_(type)
 {
-    setPos(x_, y_ );
-    switch (type_) {
-    case 1:
+    setTransformOriginPoint(boundingRect().center());
+    setPos(mapToParent(x_, y_ ));
+    if(type_ == 1){
         setPixmap(QString(":/graphics/graphics/passenger.svg"));
         setScale(.05);
-        setTransformOriginPoint(this->boundingRect().center());
-        break;
-    default:
+    }else{
         int randInt = rand()%5+1;
         setPixmap(QString(":/graphics/graphics/saab%1.svg").arg(randInt));
-        setScale(.1);
-        setTransformOriginPoint(this->boundingRect().center());
+        setScale(.07);
     }
 }
 

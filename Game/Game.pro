@@ -8,6 +8,7 @@ CONFIG += c++14
 SOURCES += \
     betteractoritem.cpp \
     bettermainwindow.cpp \
+    bomb.cpp \
     character.cpp \
     city.cpp \
     creategame.cpp \
@@ -41,6 +42,7 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     betteractoritem.h \
     bettermainwindow.h \
+    bomb.h \
     character.h \
     city.h \
     creategame.h \

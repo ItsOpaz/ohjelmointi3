@@ -5,6 +5,7 @@
 #include "interfaces/iactor.hh"
 #include "interfaces/istop.hh"
 #include "character.h"
+#include "bomb.h"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -16,8 +17,8 @@
 
 //for big map X_ADJUST 353 and Y_ADJUST 444
 //for small map X_ADJUST 0 and Y_ADJUST 500
-const int X_ADJUST = 353;
-const int Y_ADJUST = 444;
+const int X_ADJUST = 330;
+const int Y_ADJUST = 540;
 
 const int PADDING = 10;
 
@@ -36,8 +37,8 @@ public:
     explicit BetterMainWindow(QWidget *parent = 0);
     virtual ~BetterMainWindow();
 
-    void setSize(int w, int h);
-    void setTick(int t);
+    void setSize(int, int);
+    void setTick(int);
 
     void addActor(std::shared_ptr<Interface::IActor>);
     void addStop(std::shared_ptr<Interface::IStop>);
@@ -63,7 +64,8 @@ private:
     QTimer *timer;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
     QString playerName_;
-    Students::Character* character_;
+    Character* character_;
+    QVector<Bomb *> bombs_;
 
     int width_ = 1095; //pxls
     int height_ = 592;

@@ -6,6 +6,7 @@
 #include "actors/nysse.hh"
 #include "creategame.h"
 #include <QKeyEvent>
+#include "core/location.hh"
 
 namespace Students {
 
@@ -21,7 +22,6 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
         map = new QGraphicsScene(this);
         ui->gameView->setScene(map);
         map->setSceneRect(0,0,width_,height_);
-        //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &BetterMainWindow::update);
@@ -135,6 +135,7 @@ void BetterMainWindow::on_startButton_clicked()
 
 void BetterMainWindow::keyPressEvent(QKeyEvent *event)
 {
+    //dir 1 = North, 2 = South, 3 = East, 4 = West
     int dir = character_->direction();
     switch (event->key()) {
     case Qt::Key_W:
@@ -157,6 +158,15 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
             character_->setDirection(3);
         }
         break;
+    case Qt::Key_Space:{
+        //player is limited to 3 simultaneous bombs on the ground
+        if(bombs_.size() < 3){
+            auto bomb = character_->dropBomb();
+            map->addItem(bomb);
+            bombs_.append(bomb);
+        }
+        break;
+        }
     default:
 
         break;
@@ -171,7 +181,25 @@ void BetterMainWindow::set_playername(QString name)
 
 void BetterMainWindow::update()
 {
+    //character is moved and character crash will be checked
     character_->move();
     character_->crash();
+    //active bombs will be ticked and inactive will be removed
+    for (auto bomb : bombs_){
+        if(bomb->status() == 0){
+            bomb->tick();
+        }else if(bomb->status() == 1){
+//            Interface::Location loc;
+//            loc.setXY(bomb->pos().x(), bomb->pos().y());
+//            for (auto it : actorpairs_){
+//                if(it.second->giveLocation().isClose(loc)){
+//                    qDebug()<<"Boom";
+//                }
+//            }
+        }else{
+            bombs_.erase(std::remove(bombs_.begin(), bombs_.end(), bomb), bombs_.end());
+            delete bomb;
+        }
+    }
 }
 }

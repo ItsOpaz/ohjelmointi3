@@ -6,6 +6,7 @@ QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
 namespace Students
 {
 CreateGame::CreateGame():
+    //creates city, logic and mainwindow for game
     logic_(new CourseSide::Logic),
     city_(new Students::City),
     mainwindow_(new Students::BetterMainWindow)

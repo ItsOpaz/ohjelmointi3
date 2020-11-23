@@ -11,9 +11,9 @@ namespace Students {
 class BetterActorItem : public QGraphicsPixmapItem
 {
 public:
-    BetterActorItem(int x, int y, int type);
+    BetterActorItem(int, int, int);
     virtual ~BetterActorItem();
-    void setCoord(int x, int y);
+    void setCoord(int, int);
 
 protected:
     int x_;
