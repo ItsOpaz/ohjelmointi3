@@ -4,6 +4,7 @@
 #include "betteractoritem.h"
 #include "interfaces/iactor.hh"
 #include "interfaces/istop.hh"
+#include "character.h"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -52,7 +53,9 @@ signals:
 
 private slots:
     void on_startButton_clicked();
-    void set_playername(QString name);
+    void keyPressEvent(QKeyEvent*);
+    void set_playername(QString);
+    void update();
 
 private:
     Ui::BetterMainWindow *ui;
@@ -60,10 +63,11 @@ private:
     QTimer *timer;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
     QString playerName_;
+    Students::Character* character_;
 
     int width_ = 1095; //pxls
     int height_ = 592;
-    int tick_ = 500; //ms
+    int tick_ = 10; //ms
 };
 
 }

@@ -4,10 +4,17 @@
 #include "betteractoritem.h"
 
 namespace Students {
-class Character : public BetterActorItem
+class Character : public QGraphicsPixmapItem
 {
 public:
-    Character(int x, int y, int type) : BetterActorItem(x, y, type){};
+    Character();
+    void move();
+    int direction() const;
+    void setDirection(int direction);
+    void crash();
+
+private:
+    int direction_;
 };
 }
 

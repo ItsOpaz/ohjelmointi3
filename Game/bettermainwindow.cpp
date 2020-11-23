@@ -5,6 +5,7 @@
 #include "character.h"
 #include "actors/nysse.hh"
 #include "creategame.h"
+#include <QKeyEvent>
 
 namespace Students {
 
@@ -17,20 +18,13 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
         connect(&sw, &startwindow::nameSet, this, &BetterMainWindow::set_playername);
 
         ui->setupUi(this);
-        ui->gameView->setFixedSize(width_, height_);
-        ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
-
-        ui->startButton->move(width_ + PADDING , PADDING);
-
         map = new QGraphicsScene(this);
         ui->gameView->setScene(map);
         map->setSceneRect(0,0,width_,height_);
-
-        resize(minimumSizeHint());
         //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
         timer = new QTimer(this);
-        connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+        connect(timer, &QTimer::timeout, this, &BetterMainWindow::update);
         timer->start(tick_);
     }
     else{
@@ -106,8 +100,8 @@ void BetterMainWindow::setPicture(QImage &img)
 
 void BetterMainWindow::addCharacter()
 {
-    Character* player = new Character(100, 100, 2);
-    map->addItem(player);
+    character_ = new Character();
+    map->addItem(character_);
 }
 
 void BetterMainWindow::removeItem(std::shared_ptr<Interface::IActor> actor)
@@ -139,9 +133,45 @@ void BetterMainWindow::on_startButton_clicked()
     timer->stop();
 }
 
+void BetterMainWindow::keyPressEvent(QKeyEvent *event)
+{
+    int dir = character_->direction();
+    switch (event->key()) {
+    case Qt::Key_W:
+        if(dir != 2){
+            character_->setDirection(1);
+        }
+        break;
+    case Qt::Key_S:
+        if(dir != 1){
+            character_->setDirection(2);
+        }
+        break;
+    case Qt::Key_A:
+        if(dir != 3){
+            character_->setDirection(4);
+        }
+        break;
+    case Qt::Key_D:
+        if(dir != 4){
+            character_->setDirection(3);
+        }
+        break;
+    default:
+
+        break;
+    }
+}
+
 void BetterMainWindow::set_playername(QString name)
 {
     playerName_ = name;
     qDebug() << playerName_;
+}
+
+void BetterMainWindow::update()
+{
+    character_->move();
+    character_->crash();
 }
 }

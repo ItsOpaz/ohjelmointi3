@@ -13,12 +13,11 @@ CreateGame::CreateGame():
     logic_->fileConfig();
     city_->takeMainWindow(mainwindow_);
     logic_->takeCity(city_);
-    logic_->finalizeGameStart();
     city_->setBackground(smallMap, bigMap);
 }
 
 void CreateGame::StartGame()
 {
-    city_->startGame();
+    logic_->finalizeGameStart();
 }
 }

@@ -15,15 +15,13 @@ BetterActorItem::BetterActorItem(int x, int y, int type)
     case 1:
         setPixmap(QString(":/graphics/graphics/passenger.svg"));
         setScale(.05);
-        break;
-    case 2:
-        setPixmap(QString(":/graphics/graphics/helicopter.svg"));
-        setScale(.05);
+        setTransformOriginPoint(this->boundingRect().center());
         break;
     default:
         int randInt = rand()%5+1;
         setPixmap(QString(":/graphics/graphics/saab%1.svg").arg(randInt));
         setScale(.1);
+        setTransformOriginPoint(this->boundingRect().center());
     }
 }
 
