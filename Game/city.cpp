@@ -4,6 +4,7 @@
 #include <typeinfo>
 #include <iostream>
 #include "character.h"
+#include "actors/nysse.hh"
 
 namespace Students
 {
@@ -35,17 +36,23 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-    mw_->addActor(newactor);
+    if(std::dynamic_pointer_cast<CourseSide::Nysse>(newactor) != nullptr){
+        mw_->addActor(newactor);
+    }
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    mw_->removeItem(actor);
+    if(findActor(actor)){
+        mw_->removeItem(actor);
+    }
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-    mw_->removeItem(actor);
+    if(findActor(actor)){
+        mw_->removeItem(actor);
+    }
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
@@ -55,7 +62,9 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    mw_->updateCoords(actor);
+    if(findActor(actor)){
+        mw_->updateCoords(actor);
+    }
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const

@@ -7,19 +7,18 @@
 
 namespace Students {
 
-BetterActorItem::BetterActorItem(int x, int y, int type)
-    :x_(x), y_(y), type_(type)
+BetterActorItem::BetterActorItem(int x, int y, int points, bool isStop)
+    :x_(x), y_(y), points_(points), isStop_(isStop)
 {
     setTransformOriginPoint(boundingRect().center());
-    setTransformationMode(Qt::SmoothTransformation);
+//    setTransformationMode(Qt::SmoothTransformation);
     setPos(mapToParent(x_, y_ ));
-    if(type_ == 1){
-        setPixmap(QString(":/graphics/graphics/passenger.svg"));
-        setScale(.02);
+    if(isStop_){
+        setPixmap(QString(":/graphics/graphics/busstop.svg"));
+        setScale(.1);
     }else{
-        int randInt = rand()%5+1;
-        setPixmap(QString(":/graphics/graphics/saab%1.svg").arg(randInt));
-        setScale(.05);
+        setBusColor();
+        setScale(.03);
     }
 }
 
@@ -32,5 +31,27 @@ void BetterActorItem::setCoord(int x, int y)
 {
     setX( x );
     setY( y );
+}
+
+void BetterActorItem::setBusColor()
+{
+    if(points_ < 5){
+        setPixmap(QString(":/graphics/graphics/saab6.svg"));
+    }else if(points_ < 10){
+        setPixmap(QString(":/graphics/graphics/saab2.svg"));
+    }else{
+        setPixmap(QString(":/graphics/graphics/saab4.svg"));
+    }
+}
+
+int BetterActorItem::points() const
+{
+    return points_;
+}
+
+void BetterActorItem::setPoints(int points)
+{
+    points_ = points;
+    setBusColor();
 }
 }

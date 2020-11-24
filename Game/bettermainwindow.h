@@ -15,8 +15,8 @@
 #include <QVector>
 #include <map>
 
-const int X_ADJUST = 330;
-const int Y_ADJUST = 540;
+const int X_ADJUST = 347;
+const int Y_ADJUST = 552;
 
 const int PADDING = 10;
 
@@ -65,6 +65,7 @@ private:
     QGraphicsScene *map;
     QTimer *timer;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
+    QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IStop>>> stoppairs_;
     QString playerName_;
     Character* character_;
     QVector<Bomb *> bombs_;
@@ -72,6 +73,7 @@ private:
     int width_ = 1095; //pxls
     int height_ = 592;
     int tick_ = 10; //ms
+    int totalPoints_ =  0;
 };
 
 }

@@ -11,14 +11,18 @@ namespace Students {
 class BetterActorItem : public QGraphicsPixmapItem
 {
 public:
-    BetterActorItem(int, int, int);
+    BetterActorItem(int, int, int, bool);
     virtual ~BetterActorItem();
     void setCoord(int, int);
+    void setBusColor();
+    int points() const;
+    void setPoints(int);
 
 protected:
     int x_;
     int y_;
-    int type_;
+    int points_;
+    bool isStop_;
 };
 
 }

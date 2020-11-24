@@ -12,8 +12,8 @@ public:
     Character();
     void move();
     int direction() const;
-    void setDirection(int direction);
-    void crash();
+    void setDirection(int);
+    void crash(bool);
     void rotorPhase();
     Bomb* dropBomb();
 

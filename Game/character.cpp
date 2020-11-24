@@ -10,7 +10,7 @@ Character::Character()
     //helicopter is set to front
     setZValue(1);
     rotorPhase();
-    setScale(.2);
+    setScale(.1);
     //helicopter originpoint is set to center of boundingrect so rotating helicopter works
     setTransformOriginPoint(this->boundingRect().center());
     setPos(mapToParent(0, 0));
@@ -57,8 +57,11 @@ void Character::setDirection(int direction)
     direction_ = direction;
 }
 
-void Character::crash()
+void Character::crash(bool crash)
 {
+    if(crash){
+        qDebug()<<"mikä vittu siinä on ku pitää itteensä ampua";
+    }
 //    if (this->pos().rx() < -347 || this->pos().rx() > 738 || this->pos().ry() < -403 || this->pos().ry() > 184){
 //        qDebug()<<"meni heti vituiks";
 //    }

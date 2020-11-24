@@ -64,26 +64,20 @@ void BetterMainWindow::setTick(int t)
 
 void BetterMainWindow::addActor(std::shared_ptr<Interface::IActor> newActor)
 {
-    int type = 0;
-    if(std::dynamic_pointer_cast<CourseSide::Nysse>(newActor) == nullptr){
-        type = 1;
-    }
     int x = newActor->giveLocation().giveX() + X_ADJUST;
     int y = Y_ADJUST - newActor->giveLocation().giveY();
-
-    BetterActorItem* nActor = new BetterActorItem(x, y, type);
+    BetterActorItem* nActor = new BetterActorItem(x, y, 0, false);
     actorpairs_.push_back(std::make_pair(nActor, newActor));
     map->addItem(nActor);
 }
 
 void BetterMainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-    QGraphicsPixmapItem *stoppista = new QGraphicsPixmapItem(QString(":/graphics/graphics/busstop.svg"));
     int x = stop->getLocation().giveX() + X_ADJUST;
     int y = Y_ADJUST - stop->getLocation().giveY();
-    stoppista->setScale(.2);
-    stoppista->setPos(x,y);
-    map->addItem(stoppista);
+    BetterActorItem* nStop = new BetterActorItem(x, y, 1, true);
+    stoppairs_.push_back(std::make_pair(nStop, stop));
+    map->addItem(nStop);
 }
 
 
@@ -94,14 +88,8 @@ void BetterMainWindow::updateCoords(std::shared_ptr<Interface::IActor> actor)
     int x = it->second->giveLocation().giveX() + X_ADJUST;
     int y = Y_ADJUST - it->second->giveLocation().giveY();
     it->first->setCoord(x, y);
-    if(std::dynamic_pointer_cast<CourseSide::Passenger>(actor)){
-        std::shared_ptr<CourseSide::Passenger> passenger = std::dynamic_pointer_cast<CourseSide::Passenger>(actor);
-        if(passenger->isInVehicle()){
-            it->first->hide();
-        }else{
-            it->first->show();
-        }
-    }
+    std::shared_ptr<CourseSide::Nysse> bus = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
+    it->first->setPoints(bus->getPassengers().size());
 }
 
 void BetterMainWindow::setPicture(QImage &img)
@@ -149,7 +137,17 @@ void BetterMainWindow::explosion(Bomb *bomb)
     //dynamic_pointer_cast varmaa loistava ratkasu, jolla saa myös nysse luokan methodit käyttöön (getPassengers)
     //pisteiden kannalta
     auto collisions = bomb->collidingItems();
-    qDebug()<<"siinä luikahti"<<collisions.length()<<"kohdetta pillun päreiks ja näin";
+    int collisionPoints = 0;
+    for(auto i : collisions){
+        if(dynamic_cast<Character *>(i)){
+            character_->crash(true);
+        }else{
+            BetterActorItem *item = dynamic_cast<BetterActorItem*>(i);
+            collisionPoints += item->points();
+        }
+    }
+    totalPoints_ += collisionPoints;
+    qDebug()<<"siinä luikahti"<<collisionPoints<<"bongoo taskuun ja näin";
 }
 
 
@@ -210,7 +208,7 @@ void BetterMainWindow::update()
 {
     //character is moved and character crash will be checked
     character_->move();
-    character_->crash();
+    character_->crash(false);
     //active bombs will be ticked and inactive will be removed
     for (auto bomb : bombs_){
         if(bomb->status()){
