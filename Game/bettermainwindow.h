@@ -15,8 +15,6 @@
 #include <QVector>
 #include <map>
 
-//for big map X_ADJUST 353 and Y_ADJUST 444
-//for small map X_ADJUST 0 and Y_ADJUST 500
 const int X_ADJUST = 330;
 const int Y_ADJUST = 540;
 
@@ -60,6 +58,7 @@ private slots:
     void keyPressEvent(QKeyEvent*);
     void set_playername(QString);
     void update();
+    bool eventFilter(QObject *object, QEvent *event);
 
 private:
     Ui::BetterMainWindow *ui;

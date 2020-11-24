@@ -14,27 +14,33 @@ Character::Character()
     //helicopter originpoint is set to center of boundingrect so rotating helicopter works
     setTransformOriginPoint(this->boundingRect().center());
     setPos(mapToParent(0, 0));
+    setTransformationMode(Qt::SmoothTransformation);
 }
 
 void Character::move()
 {
     rotorPhase();
+    //direction 1 = North, 2 = South, 3 = East, 4 = West
     switch (direction_) {
     case 1:
         moveBy(0, -1);
         this->setRotation(0);
+        emit moveVerticalScroll(pos().y()*4+250);
         break;
     case 2:
         moveBy(0, 1);
         this->setRotation(180);
+        emit moveVerticalScroll(pos().y()*4+250);
         break;
     case 3:
         moveBy(1, 0);
         this->setRotation(90);
+        emit moveHorizontalScroll(pos().x()*4-250);
         break;
     case 4:
         moveBy(-1, 0);
         this->setRotation(270);
+        emit moveHorizontalScroll(pos().x()*4-250);
         break;
     default:
         break;

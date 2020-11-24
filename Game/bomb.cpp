@@ -6,9 +6,10 @@ namespace Students {
 Bomb::Bomb(QPointF pos, int dir)
 {
     //bomb gets position and direction from helicopter
-    setScale(.0005);
+    setScale(.07);
     setPixmap(QString(":/graphics/graphics/bomb.svg"));
     setTransformOriginPoint(boundingRect().center());
+    setTransformationMode(Qt::SmoothTransformation);
     setPos(pos);
     //dir 1 = North, 2 = South, 3 = East, 4 = West
     switch (dir) {
@@ -38,7 +39,7 @@ void Bomb::tick()
         explode();
     }else if(phase_ > 100){
         //bomb is scaled smaller every tick so it seems like its dropping
-        setScale(.0005 * phase_);
+        setScale(.07 * phase_/300);
     }
     phase_ -= 1;
 }

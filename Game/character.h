@@ -5,8 +5,9 @@
 #include "bomb.h"
 
 namespace Students {
-class Character : public QGraphicsPixmapItem
+class Character : public QObject, public QGraphicsPixmapItem
 {
+    Q_OBJECT
 public:
     Character();
     void move();
@@ -15,6 +16,10 @@ public:
     void crash();
     void rotorPhase();
     Bomb* dropBomb();
+
+signals:
+    void moveVerticalScroll(int);
+    void moveHorizontalScroll(int);
 
 private:
     int direction_;

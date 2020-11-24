@@ -11,14 +11,15 @@ BetterActorItem::BetterActorItem(int x, int y, int type)
     :x_(x), y_(y), type_(type)
 {
     setTransformOriginPoint(boundingRect().center());
+    setTransformationMode(Qt::SmoothTransformation);
     setPos(mapToParent(x_, y_ ));
     if(type_ == 1){
         setPixmap(QString(":/graphics/graphics/passenger.svg"));
-        setScale(.03);
+        setScale(.02);
     }else{
         int randInt = rand()%5+1;
         setPixmap(QString(":/graphics/graphics/saab%1.svg").arg(randInt));
-        setScale(.07);
+        setScale(.05);
     }
 }
 

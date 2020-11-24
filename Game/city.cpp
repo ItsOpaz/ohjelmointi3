@@ -30,7 +30,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
     mw_->addCharacter();
-    mw_->show();
+    mw_->showMaximized();
 }
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)

@@ -7,6 +7,9 @@
 #include "creategame.h"
 #include <QKeyEvent>
 #include "core/location.hh"
+#include <QDesktopWidget>
+#include <QScreen>
+#include <QScrollBar>
 
 namespace Students {
 
@@ -20,8 +23,18 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
 
         ui->setupUi(this);
         map = new QGraphicsScene(this);
-        ui->gameView->setScene(map);
         map->setSceneRect(0,0,width_,height_);
+        ui->gameView->setScene(map);
+        //gameview is set to screensize
+        QRect  sGeometry = QGuiApplication::primaryScreen()->geometry();
+        ui->gameView->resize(sGeometry.width(), sGeometry.height());
+        //ScrollBars are hidden
+        ui->gameView->QAbstractScrollArea::setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+        ui->gameView->QAbstractScrollArea::setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+        //set mousewheel event filter for gameview
+        ui->gameView->viewport()->installEventFilter(this);
+
+        ui->gameView->scale(4, 4);
 
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &BetterMainWindow::update);
@@ -30,8 +43,6 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
     else{
         close();
     }
-
-
 
 }
 
@@ -102,6 +113,11 @@ void BetterMainWindow::addCharacter()
 {
     character_ = new Character();
     map->addItem(character_);
+    ui->gameView->centerOn(character_);
+    QScrollBar* horizontal = ui->gameView->QAbstractScrollArea::horizontalScrollBar();
+    QScrollBar* vertical = ui->gameView->QAbstractScrollArea::verticalScrollBar();
+    connect(character_, SIGNAL(moveHorizontalScroll(int)), horizontal, SLOT(setValue(int)));
+    connect(character_, SIGNAL(moveVerticalScroll(int)), vertical, SLOT(setValue(int)));
 }
 
 void BetterMainWindow::removeItem(std::shared_ptr<Interface::IActor> actor)
@@ -205,4 +221,14 @@ void BetterMainWindow::update()
         }
     }
 }
+
+bool BetterMainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    //filter out mousewheel events in gameview
+    if (object == ui->gameView->viewport() && event->type() == QEvent::Wheel) {
+        return true;
+    }
+    return false;
+}
+
 }
