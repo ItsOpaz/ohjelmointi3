@@ -6,6 +6,7 @@
 #include "interfaces/istop.hh"
 #include "character.h"
 #include "bomb.h"
+#include "plane.h"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -66,6 +67,7 @@ private:
     QTimer *timer;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IStop>>> stoppairs_;
+    QVector<Plane *> planes_;
     QString playerName_;
     Character* character_;
     QVector<Bomb *> bombs_;

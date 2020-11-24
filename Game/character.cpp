@@ -7,7 +7,7 @@ namespace Students {
 Character::Character()
     :direction_(1)
 {
-    //helicopter is set to front
+    //helicopter is set top of busstop and bus
     setZValue(1);
     rotorPhase();
     setScale(.1);
@@ -59,12 +59,12 @@ void Character::setDirection(int direction)
 
 void Character::crash(bool crash)
 {
+    if (this->pos().x() < -173 || this->pos().x() > 924 || this->pos().y() < -173 || this->pos().y() > 378){
+        qDebug()<<"ajoit harhaan";
+    }
     if(crash){
         qDebug()<<"mikä vittu siinä on ku pitää itteensä ampua";
     }
-//    if (this->pos().rx() < -347 || this->pos().rx() > 738 || this->pos().ry() < -403 || this->pos().ry() > 184){
-//        qDebug()<<"meni heti vituiks";
-//    }
 }
 
 void Character::rotorPhase()

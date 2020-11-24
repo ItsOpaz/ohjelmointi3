@@ -206,15 +206,31 @@ void BetterMainWindow::set_playername(QString name)
 
 void BetterMainWindow::update()
 {
+    //count of enemy planes is set here
+    while(planes_.length() < 10){
+        Plane *plane = new Plane();
+        planes_.append(plane);
+        map->addItem(plane);
+    }
     //character is moved and character crash will be checked
     character_->move();
     character_->crash(false);
+    //move enemyplanes
+    for(auto plane : planes_){
+        if(plane->checkPos()){
+            plane->move();
+        }else{
+            planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
+            map->removeItem(plane);
+        }
+    }
     //active bombs will be ticked and inactive will be removed
     for (auto bomb : bombs_){
         if(bomb->status()){
             bomb->tick();
         }else{
             bombs_.erase(std::remove(bombs_.begin(), bombs_.end(), bomb), bombs_.end());
+            map->removeItem(bomb);
             delete bomb;
         }
     }

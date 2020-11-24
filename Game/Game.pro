@@ -13,6 +13,7 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     main.cc \
+    plane.cpp \
     startwindow.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -46,6 +47,7 @@ HEADERS += \
     character.h \
     city.h \
     creategame.h \
+    plane.h \
     startwindow.h
 
 FORMS += \
