@@ -33,9 +33,8 @@ Bomb::Bomb(QPointF pos, int dir)
 void Bomb::tick()
 {
     if(phase_ == 0){
-        status_ = 2;
+        status_ = false;
     }else if(phase_ == 100){
-        status_ = 1;
         explode();
     }else if(phase_ > 100){
         //bomb is scaled smaller every tick so it seems like its dropping
@@ -49,9 +48,10 @@ void Bomb::explode()
     setScale(.1);
     setRotation(0);
     setPixmap(QString(":/graphics/graphics/explosion.svg"));
+    emit bombExplosion(this);
 }
 
-int Bomb::status() const
+bool Bomb::status() const
 {
     return status_;
 }

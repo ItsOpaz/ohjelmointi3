@@ -126,6 +126,16 @@ std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
     return actors;
 }
 
+void BetterMainWindow::explosion(Bomb *bomb)
+{
+    //tähän settii mite pisteet lasketaa osumista
+    //collisions vektori palauttaa kaikki grafiikkaitemit joihin pommi osuu
+    //dynamic_pointer_cast varmaa loistava ratkasu, jolla saa myös nysse luokan methodit käyttöön (getPassengers)
+    //pisteiden kannalta
+    auto collisions = bomb->collidingItems();
+    qDebug()<<"siinä luikahti"<<collisions.length()<<"kohdetta pillun päreiks ja näin";
+}
+
 
 void BetterMainWindow::on_startButton_clicked()
 {
@@ -164,6 +174,7 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
             auto bomb = character_->dropBomb();
             map->addItem(bomb);
             bombs_.append(bomb);
+            connect(bomb, SIGNAL(bombExplosion(Bomb*)), this, SLOT(explosion(Bomb*)));
         }
         break;
         }
@@ -186,16 +197,8 @@ void BetterMainWindow::update()
     character_->crash();
     //active bombs will be ticked and inactive will be removed
     for (auto bomb : bombs_){
-        if(bomb->status() == 0){
+        if(bomb->status()){
             bomb->tick();
-        }else if(bomb->status() == 1){
-//            Interface::Location loc;
-//            loc.setXY(bomb->pos().x(), bomb->pos().y());
-//            for (auto it : actorpairs_){
-//                if(it.second->giveLocation().isClose(loc)){
-//                    qDebug()<<"Boom";
-//                }
-//            }
         }else{
             bombs_.erase(std::remove(bombs_.begin(), bombs_.end(), bomb), bombs_.end());
             delete bomb;

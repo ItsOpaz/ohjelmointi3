@@ -52,6 +52,9 @@ public:
 signals:
     void gameStarted();
 
+public slots:
+    void explosion(Bomb*);
+
 private slots:
     void on_startButton_clicked();
     void keyPressEvent(QKeyEvent*);

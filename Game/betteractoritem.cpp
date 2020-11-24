@@ -14,7 +14,7 @@ BetterActorItem::BetterActorItem(int x, int y, int type)
     setPos(mapToParent(x_, y_ ));
     if(type_ == 1){
         setPixmap(QString(":/graphics/graphics/passenger.svg"));
-        setScale(.05);
+        setScale(.03);
     }else{
         int randInt = rand()%5+1;
         setPixmap(QString(":/graphics/graphics/saab%1.svg").arg(randInt));
