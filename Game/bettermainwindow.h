@@ -44,6 +44,7 @@ public:
     void updateCoords(std::shared_ptr<Interface::IActor>);
     void setPicture(QImage &img);
     void addCharacter();
+    void addPlane();
     void removeItem(std::shared_ptr<Interface::IActor>);
     bool checkActor(std::shared_ptr<Interface::IActor>);
     std::vector<std::shared_ptr<Interface::IActor>> getActors();

@@ -1,18 +1,15 @@
 <RCC>
     <qresource prefix="/graphics">
-        <file>graphics/passenger.svg</file>
         <file>graphics/saab1.svg</file>
         <file>graphics/saab2.svg</file>
         <file>graphics/saab3.svg</file>
-        <file>graphics/saab4.svg</file>
-        <file>graphics/saab5.svg</file>
-        <file>graphics/saab6.svg</file>
-        <file>graphics/busstop.svg</file>
         <file>graphics/helicopter_phase1.svg</file>
         <file>graphics/helicopter_phase2.svg</file>
         <file>graphics/helicopter_phase3.svg</file>
         <file>graphics/helicopter_phase4.svg</file>
         <file>graphics/bomb.svg</file>
         <file>graphics/explosion.svg</file>
+        <file>graphics/kela.svg</file>
+        <file>graphics/plane.svg</file>
     </qresource>
 </RCC>

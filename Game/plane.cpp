@@ -13,33 +13,33 @@ Plane::Plane()
     //plane originpoint is set to center of boundingrect so rotating helicopter works
     setTransformOriginPoint(this->boundingRect().center());
     setTransformationMode(Qt::SmoothTransformation);
-    setPixmap(QString(":/graphics/graphics/helicopter_phase4.svg"));
+    setPixmap(QString(":/graphics/graphics/plane.svg"));
     switch (direction_) {
     case 0:{
-        limit_ = -173;
-        int x = rand() % 1097 - 173;
-        setPos(mapToParent(x, 378));
+        limit_ = 0;
+        int x = rand() % 1097;
+        setPos(mapToScene(x, 550));
         setRotation(0);
         break;
     }
     case 1:{
-        limit_ = 378;
-        int x = rand() % 1097 - 173;
-        setPos(mapToParent(x, -173));
+        limit_ = 550;
+        int x = rand() % 1097;
+        setPos(mapToScene(x, 0));
         setRotation(180);
         break;
     }
     case 2:{
-        limit_ = 924;
-        int y = rand() % 551 - 173;
-        setPos(mapToParent(-173, y));
+        limit_ = 1097;
+        int y = rand() % 550;
+        setPos(mapToScene(0, y));
         setRotation(90);
         break;
     }
     default:
-        limit_ = -173;
-        int y = rand() % 551 - 173;
-        setPos(mapToParent(924, y));
+        limit_ = 0;
+        int y = rand() % 550;
+        setPos(mapToScene(1097, y));
         setRotation(270);
         break;
     }
@@ -49,16 +49,16 @@ bool Plane::checkPos()
 {
     switch (direction_) {
     case 0:
-        if(pos().y() < limit_){return false;}
+        if(this->scenePos().y() < limit_){return false;}
         return true;
     case 1:
-        if(pos().y() > limit_){return false;}
+        if(this->scenePos().y() > limit_){return false;}
         return true;
     case 2:
-        if(pos().x() > limit_){return false;}
+        if(this->scenePos().x() > limit_){return false;}
         return true;
     default:
-        if(pos().x() < limit_){return false;}
+        if(this->scenePos().x() < limit_){return false;}
         return true;
     }
 }

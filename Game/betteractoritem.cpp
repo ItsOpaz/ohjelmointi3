@@ -14,11 +14,11 @@ BetterActorItem::BetterActorItem(int x, int y, int points, bool isStop)
 //    setTransformationMode(Qt::SmoothTransformation);
     setPos(mapToParent(x_, y_ ));
     if(isStop_){
-        setPixmap(QString(":/graphics/graphics/busstop.svg"));
+        setPixmap(QString(":/graphics/graphics/kela.svg"));
         setScale(.1);
     }else{
         setBusColor();
-        setScale(.03);
+        setScale(.1);
     }
 }
 
@@ -36,11 +36,11 @@ void BetterActorItem::setCoord(int x, int y)
 void BetterActorItem::setBusColor()
 {
     if(points_ < 5){
-        setPixmap(QString(":/graphics/graphics/saab6.svg"));
+        setPixmap(QString(":/graphics/graphics/saab1.svg"));
     }else if(points_ < 10){
         setPixmap(QString(":/graphics/graphics/saab2.svg"));
     }else{
-        setPixmap(QString(":/graphics/graphics/saab4.svg"));
+        setPixmap(QString(":/graphics/graphics/saab3.svg"));
     }
 }
 

@@ -10,6 +10,7 @@
 #include <QDesktopWidget>
 #include <QScreen>
 #include <QScrollBar>
+#include "plane.h"
 
 namespace Students {
 
@@ -106,6 +107,13 @@ void BetterMainWindow::addCharacter()
     QScrollBar* vertical = ui->gameView->QAbstractScrollArea::verticalScrollBar();
     connect(character_, SIGNAL(moveHorizontalScroll(int)), horizontal, SLOT(setValue(int)));
     connect(character_, SIGNAL(moveVerticalScroll(int)), vertical, SLOT(setValue(int)));
+}
+
+void BetterMainWindow::addPlane()
+{
+    Plane *plane = new Plane();
+    planes_.append(plane);
+    map->addItem(plane);
 }
 
 void BetterMainWindow::removeItem(std::shared_ptr<Interface::IActor> actor)
@@ -208,9 +216,8 @@ void BetterMainWindow::update()
 {
     //count of enemy planes is set here
     while(planes_.length() < 10){
-        Plane *plane = new Plane();
-        planes_.append(plane);
-        map->addItem(plane);
+        qDebug()<<planes_.length();
+        addPlane();
     }
     //character is moved and character crash will be checked
     character_->move();
@@ -221,6 +228,7 @@ void BetterMainWindow::update()
             plane->move();
         }else{
             planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
+                    qDebug()<<map;
             map->removeItem(plane);
         }
     }
@@ -230,6 +238,7 @@ void BetterMainWindow::update()
             bomb->tick();
         }else{
             bombs_.erase(std::remove(bombs_.begin(), bombs_.end(), bomb), bombs_.end());
+                    qDebug()<<map;
             map->removeItem(bomb);
             delete bomb;
         }
