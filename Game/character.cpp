@@ -91,6 +91,14 @@ Bomb *Character::dropBomb()
     return new Bomb(this->pos(), direction());
 }
 
+void Character::planeHit(bool status)
+{
+    if(planeHit_ != status && planeHit_ == false){
+        crash(true);
+    }
+    planeHit_ = status;
+}
+
 
 }
 

@@ -270,13 +270,15 @@ void BetterMainWindow::update()
     }
     //character is moved and character crash will be checked
     character_->move();
-    character_->crash(false);
+    character_->planeHit(false);
     //move enemyplanes
     for(auto plane : planes_){
         if(plane->checkPos()){
             plane->move();
             if(plane->collidesWithItem(character_)){
-                //character_->crash(true);
+                plane->destroy();
+                planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
+                character_->planeHit(true);
             }
         }else{
             planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());

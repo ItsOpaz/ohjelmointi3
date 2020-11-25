@@ -17,6 +17,7 @@ public:
     void crash(bool);
     void rotorPhase();
     Bomb* dropBomb();
+    void planeHit(bool);
 
 signals:
     void damage_recieved();
@@ -24,6 +25,7 @@ signals:
 private:
     int direction_;
     int phase_ = 1;
+    bool planeHit_ = false;
 };
 }
 
