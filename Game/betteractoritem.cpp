@@ -8,10 +8,10 @@
 namespace Students {
 
 BetterActorItem::BetterActorItem(int x, int y, int points, bool isStop)
-    :x_(x), y_(y), points_(points), isStop_(isStop)
+    : points_(points), isStop_(isStop)
 {
     setTransformationMode(Qt::SmoothTransformation);
-    setPos(x_, y_);
+    setPos(x, y);
     setTransformOriginPoint(boundingRect().center());
     if(isStop_){
         setOffset(0, -150);

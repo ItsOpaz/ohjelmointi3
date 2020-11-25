@@ -19,8 +19,6 @@ public:
     void setPoints(int);
 
 protected:
-    int x_;
-    int y_;
     int points_;
     bool isStop_;
 };
