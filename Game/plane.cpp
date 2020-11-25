@@ -7,39 +7,35 @@ Plane::Plane()
 {
     //plane is set on top of bustops, busses and helicopter
     setZValue(4);
-    setScale(.1);
+    setScale(.07);
     direction_ = rand() % 4;
-    speed_ = rand() % 5 + 1;
+    speed_ = rand() % 2 + 1;
     //plane originpoint is set to center of boundingrect so rotating helicopter works
     setTransformOriginPoint(this->boundingRect().center());
     setTransformationMode(Qt::SmoothTransformation);
     setPixmap(QString(":/graphics/graphics/plane.svg"));
     switch (direction_) {
     case 0:{
-        limit_ = 0;
-        int x = rand() % 1097;
-        setPos(mapToScene(x, 550));
+        int x = rand() % (X_HIGHEST + X_HIGHEST + 1) - X_LOWEST;
+        setPos(x, Y_MAX);
         setRotation(0);
         break;
     }
     case 1:{
-        limit_ = 550;
-        int x = rand() % 1097;
-        setPos(mapToScene(x, 0));
+        int x = rand() % (X_HIGHEST + X_HIGHEST + 1) - X_LOWEST;
+        setPos(x, Y_MIN);
         setRotation(180);
         break;
     }
     case 2:{
-        limit_ = 1097;
-        int y = rand() % 550;
-        setPos(mapToScene(0, y));
+        int y = rand() % (Y_MAX + Y_MAX + 1) - Y_MIN;
+        setPos(X_LOWEST, y);
         setRotation(90);
         break;
     }
     case 3:{
-        limit_ = 0;
-        int y = rand() % 550;
-        setPos(mapToScene(1097, y));
+        int y = rand() % (Y_MAX + Y_MAX + 1) - Y_MIN;
+        setPos(X_HIGHEST, y);
         setRotation(270);
         break;
     }
@@ -50,20 +46,9 @@ Plane::Plane()
 
 bool Plane::checkPos()
 {
-    switch (direction_) {
-    case 0:
-        if(this->scenePos().y() < limit_){return false;}
-        return true;
-    case 1:
-        if(this->scenePos().y() > limit_){return false;}
-        return true;
-    case 2:
-        if(this->scenePos().x() > limit_){return false;}
-        return true;
-    case 3:
-        if(this->scenePos().x() < limit_){return false;}
-        return true;
-    default:
+    if(this->pos().x() < X_LOWEST || this->pos().x() > X_HIGHEST || this->pos().y() < Y_MIN || this->pos().y() > Y_MAX){
+        return false;
+    }else{
         return true;
     }
 }

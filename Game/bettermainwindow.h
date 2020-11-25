@@ -22,6 +22,7 @@ const int Y_ADJUST = 540;
 
 const int PADDING = 10;
 
+const int PLANE_COUNT = 5;
 
 namespace Ui {
 class BetterMainWindow;

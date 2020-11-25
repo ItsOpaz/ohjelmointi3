@@ -166,7 +166,7 @@ void BetterMainWindow::explosion(Bomb *bomb)
     int collisionPoints = 0;
     for(auto i : collisions){
         if(dynamic_cast<Character *>(i)){
-            character_->crash(true);
+            character_->crash();
         }else if(dynamic_cast<Bomb *>(i)){
             break;
         }else if(dynamic_cast<Plane *>(i)){
@@ -265,11 +265,12 @@ void BetterMainWindow::update()
 {
     ui->gameView->centerOn(character_);
     //count of enemy planes is set here
-    while(planes_.length() < 10){
+    while(planes_.length() < PLANE_COUNT){
         addPlane();
     }
     //character is moved and character crash will be checked
     character_->move();
+    character_->wallhit();
     character_->planeHit(false);
     //move enemyplanes
     for(auto plane : planes_){

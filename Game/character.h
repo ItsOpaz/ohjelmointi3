@@ -14,10 +14,11 @@ public:
     void move();
     int direction() const;
     void setDirection(int);
-    void crash(bool);
+    void crash();
     void rotorPhase();
     Bomb* dropBomb();
     void planeHit(bool);
+    void wallhit();
 
 signals:
     void damage_recieved();

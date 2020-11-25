@@ -4,6 +4,11 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 
+const int X_LOWEST = 0;
+const int X_HIGHEST = 1095;
+const int Y_MIN = 0;
+const int Y_MAX = 592;
+
 namespace Students {
 
 class Plane : public QGraphicsPixmapItem
@@ -18,7 +23,6 @@ public:
 private:
     int direction_;
     int speed_;
-    int limit_;
     bool status_;
 };
 }

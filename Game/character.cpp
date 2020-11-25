@@ -53,16 +53,9 @@ void Character::setDirection(int direction)
     direction_ = direction;
 }
 
-void Character::crash(bool crash)
+void Character::crash()
 {
-    if (this->pos().x() < -173 || this->pos().x() > 924 || this->pos().y() < -173 || this->pos().y() > 378){
-        emit damage_recieved();
-        qDebug()<<"ajoit harhaan";
-    }
-    if(crash){
-        emit damage_recieved();
-        qDebug()<<"mikä vittu siinä on ku pitää itteensä ampua";
-    }
+    emit damage_recieved();
 }
 
 void Character::rotorPhase()
@@ -94,9 +87,32 @@ Bomb *Character::dropBomb()
 void Character::planeHit(bool status)
 {
     if(planeHit_ != status && planeHit_ == false){
-        crash(true);
+        crash();
     }
     planeHit_ = status;
+}
+
+void Character::wallhit()
+{
+    if(this->pos().x() < -165 || this->pos().x() > 905 || this->pos().y() < -165 || this->pos().y() > 370){
+        switch (direction_) {
+        case 1:
+            direction_ = 2;
+            break;
+        case 2:
+            direction_ = 1;
+            break;
+        case 3:
+            direction_ = 4;
+            break;
+        case 4:
+            direction_ = 3;
+            break;
+        default:
+            break;
+        }
+        crash();
+    }
 }
 
 
