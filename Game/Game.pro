@@ -14,7 +14,8 @@ SOURCES += \
     creategame.cpp \
     main.cc \
     plane.cpp \
-    startwindow.cpp
+    startwindow.cpp \
+    statistics.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -48,7 +49,8 @@ HEADERS += \
     city.h \
     creategame.h \
     plane.h \
-    startwindow.h
+    startwindow.h \
+    statistics.h
 
 FORMS += \
     bettermainwindow.ui \

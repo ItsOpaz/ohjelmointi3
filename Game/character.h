@@ -3,6 +3,7 @@
 
 #include <QGraphicsPixmapItem>
 #include "bomb.h"
+#include <QObject>
 
 namespace Students {
 class Character : public QObject, public QGraphicsPixmapItem
@@ -18,8 +19,7 @@ public:
     Bomb* dropBomb();
 
 signals:
-    void moveVerticalScroll(int);
-    void moveHorizontalScroll(int);
+    void damage_recieved();
 
 private:
     int direction_;

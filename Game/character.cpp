@@ -25,22 +25,18 @@ void Character::move()
     case 1:
         moveBy(0, -1);
         this->setRotation(0);
-        emit moveVerticalScroll(pos().y()*4+250);
         break;
     case 2:
         moveBy(0, 1);
         this->setRotation(180);
-        emit moveVerticalScroll(pos().y()*4+250);
         break;
     case 3:
         moveBy(1, 0);
         this->setRotation(90);
-        emit moveHorizontalScroll(pos().x()*4-250);
         break;
     case 4:
         moveBy(-1, 0);
         this->setRotation(270);
-        emit moveHorizontalScroll(pos().x()*4-250);
         break;
     default:
         break;
@@ -60,9 +56,11 @@ void Character::setDirection(int direction)
 void Character::crash(bool crash)
 {
     if (this->pos().x() < -173 || this->pos().x() > 924 || this->pos().y() < -173 || this->pos().y() > 378){
+        emit damage_recieved();
         qDebug()<<"ajoit harhaan";
     }
     if(crash){
+        emit damage_recieved();
         qDebug()<<"mikä vittu siinä on ku pitää itteensä ampua";
     }
 }

@@ -16,12 +16,12 @@ namespace Students {
 
 BetterMainWindow::BetterMainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::BetterMainWindow)
+    ui(new Ui::BetterMainWindow),
+    stats_(new statistics)
 {
     Students::startwindow sw(this);
+    connect(&sw, &startwindow::infoSet, this, &BetterMainWindow::set_stat_info);
     if (sw.exec()) {
-        connect(&sw, &startwindow::nameSet, this, &BetterMainWindow::set_playername);
-
         ui->setupUi(this);
         map = new QGraphicsScene(this);
         map->setSceneRect(0,0,width_,height_);
@@ -37,6 +37,11 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
 
         ui->gameView->scale(4, 4);
 
+        //set player name display and starting lifes amount
+        ui->label_player_name->setText(stats_->get_score().first);
+        ui->lcdNumber_lifes->display(stats_->get_lifes());
+        ui->lcdNumber_lifes->setPalette(Qt::green);
+
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &BetterMainWindow::update);
         timer->start(tick_);
@@ -44,7 +49,6 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
     else{
         close();
     }
-
 }
 
 BetterMainWindow::~BetterMainWindow()
@@ -104,10 +108,8 @@ void BetterMainWindow::addCharacter()
     character_ = new Character();
     map->addItem(character_);
     ui->gameView->centerOn(character_);
-    QScrollBar* horizontal = ui->gameView->QAbstractScrollArea::horizontalScrollBar();
-    QScrollBar* vertical = ui->gameView->QAbstractScrollArea::verticalScrollBar();
-    connect(character_, SIGNAL(moveHorizontalScroll(int)), horizontal, SLOT(setValue(int)));
-    connect(character_, SIGNAL(moveVerticalScroll(int)), vertical, SLOT(setValue(int)));
+    connect(character_, &Character::damage_recieved, stats_, &statistics::reduce_lifes);
+    connect(character_, &Character::damage_recieved, this, &BetterMainWindow::damage_taken);
 }
 
 void BetterMainWindow::addPlane()
@@ -153,22 +155,37 @@ void BetterMainWindow::explosion(Bomb *bomb)
         }else if(dynamic_cast<Bomb *>(i)){
             break;
         }else if(dynamic_cast<Plane *>(i)){
-            break;
+            collisionPoints += 15;
         }else{
             BetterActorItem *item = dynamic_cast<BetterActorItem*>(i);
             collisionPoints += item->points();
         }
     }
     totalPoints_ += collisionPoints;
+    stats_->increase_score(collisionPoints);
+    ui->lcdNumber_score_display->display(stats_->get_score().second);
     qDebug()<<"siinä luikahti"<<collisionPoints<<"bongoo taskuun ja näin";
+    qDebug()<<"tilastoja on tollai->"<<stats_->get_score();
 }
 
-
-void BetterMainWindow::on_startButton_clicked()
+void BetterMainWindow::set_stat_info(QString name, QString diff)
 {
-    qDebug() << "Pause clicked";
-    timer->stop();
+    stats_->set_info(name, diff);
 }
+
+void BetterMainWindow::damage_taken()
+{
+    qDebug()<<stats_->get_lifes();
+    switch (stats_->get_lifes()) {
+    case 2:
+        ui->lcdNumber_lifes->setPalette(Qt::yellow);
+        break;
+    default:
+        ui->lcdNumber_lifes->setPalette(Qt::red);
+    }
+    ui->lcdNumber_lifes->display(stats_->get_lifes());
+}
+
 
 void BetterMainWindow::keyPressEvent(QKeyEvent *event)
 {
@@ -202,23 +219,24 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
             map->addItem(bomb);
             bombs_.append(bomb);
             connect(bomb, SIGNAL(bombExplosion(Bomb*)), this, SLOT(explosion(Bomb*)));
+            stats_->bomb_dropped();
+            ui->lcdNumber_bombs_dropped->display(stats_->get_bombs_amount());
         }
         break;
         }
+    case Qt::Key_Escape:{
+        close();
+    }
     default:
 
         break;
     }
 }
 
-void BetterMainWindow::set_playername(QString name)
-{
-    playerName_ = name;
-    qDebug() << playerName_;
-}
 
 void BetterMainWindow::update()
 {
+    ui->gameView->centerOn(character_);
     //count of enemy planes is set here
     while(planes_.length() < 10){
         addPlane();
@@ -244,6 +262,7 @@ void BetterMainWindow::update()
             map->removeItem(bomb);
         }
     }
+    stats_->tick_counter();
 }
 
 bool BetterMainWindow::eventFilter(QObject *object, QEvent *event)

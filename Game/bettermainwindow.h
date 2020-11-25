@@ -7,6 +7,7 @@
 #include "character.h"
 #include "bomb.h"
 #include "plane.h"
+#include "statistics.h"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -49,16 +50,18 @@ public:
     bool checkActor(std::shared_ptr<Interface::IActor>);
     std::vector<std::shared_ptr<Interface::IActor>> getActors();
 
+
 signals:
     void gameStarted();
 
 public slots:
     void explosion(Bomb*);
+    void set_stat_info(QString, QString);
+    void damage_taken();
 
 private slots:
-    void on_startButton_clicked();
     void keyPressEvent(QKeyEvent*);
-    void set_playername(QString);
+
     void update();
     bool eventFilter(QObject *object, QEvent *event);
 
@@ -69,9 +72,10 @@ private:
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IStop>>> stoppairs_;
     QVector<Plane *> planes_;
-    QString playerName_;
     Character* character_;
     QVector<Bomb *> bombs_;
+    statistics* stats_;
+
 
     int width_ = 1095; //pxls
     int height_ = 592;

@@ -35,8 +35,7 @@ private slots:
     void on_pushButton_cancel_clicked();
 
 signals:
-    void nameSet(QString name);
-    void difficultySet(QString difficuty);
+    void infoSet(QString name, QString difficulty);
 
 
 private:

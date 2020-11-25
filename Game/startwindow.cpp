@@ -29,7 +29,6 @@ void startwindow::setDifficulty(QString difficulty)
     else{
         ui->pushButton->setDisabled(false);
     }
-    qDebug() << difficulty_;
 }
 
 bool startwindow::check_name(QString name)
@@ -61,8 +60,7 @@ void startwindow::on_lineEdit_playername_textChanged(const QString &arg1)
 
 void Students::startwindow::on_pushButton_clicked()
 {
-    emit nameSet(playerName_);
-    emit difficultySet(difficulty_);
+    emit infoSet(playerName_, difficulty_);
     accept();
 }
 
