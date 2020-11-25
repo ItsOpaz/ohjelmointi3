@@ -49,6 +49,8 @@ public:
     void removeItem(std::shared_ptr<Interface::IActor>);
     bool checkActor(std::shared_ptr<Interface::IActor>);
     std::vector<std::shared_ptr<Interface::IActor>> getActors();
+    void game_over();
+    statistics* get_stats();
 
 
 signals:

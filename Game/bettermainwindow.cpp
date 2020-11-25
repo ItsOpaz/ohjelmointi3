@@ -11,6 +11,7 @@
 #include <QScreen>
 #include <QScrollBar>
 #include "plane.h"
+#include "gameover.h"
 
 namespace Students {
 
@@ -141,6 +142,18 @@ std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
     return actors;
 }
 
+void BetterMainWindow::game_over()
+{
+    Students::gameover end_window(this);
+    end_window.exec();
+    close();
+}
+
+statistics *BetterMainWindow::get_stats()
+{
+    return stats_;
+}
+
 void BetterMainWindow::explosion(Bomb *bomb)
 {
     //tähän settii mite pisteet lasketaa osumista
@@ -175,15 +188,20 @@ void BetterMainWindow::set_stat_info(QString name, QString diff)
 
 void BetterMainWindow::damage_taken()
 {
-    qDebug()<<stats_->get_lifes();
+    ui->lcdNumber_lifes->display(stats_->get_lifes());
     switch (stats_->get_lifes()) {
     case 2:
         ui->lcdNumber_lifes->setPalette(Qt::yellow);
         break;
-    default:
+    case 1:
         ui->lcdNumber_lifes->setPalette(Qt::red);
+        break;
+    case 0:
+        game_over();
+        break;
+    default:
+        break;
     }
-    ui->lcdNumber_lifes->display(stats_->get_lifes());
 }
 
 

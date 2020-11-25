@@ -12,6 +12,7 @@ SOURCES += \
     character.cpp \
     city.cpp \
     creategame.cpp \
+    gameover.cpp \
     main.cc \
     plane.cpp \
     startwindow.cpp \
@@ -48,12 +49,14 @@ HEADERS += \
     character.h \
     city.h \
     creategame.h \
+    gameover.h \
     plane.h \
     startwindow.h \
     statistics.h
 
 FORMS += \
     bettermainwindow.ui \
+    gameover.ui \
     startwindow.ui
 
 RESOURCES += \
