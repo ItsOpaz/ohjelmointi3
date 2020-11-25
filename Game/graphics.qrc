@@ -11,5 +11,8 @@
         <file>graphics/explosion.svg</file>
         <file>graphics/kela.svg</file>
         <file>graphics/plane.svg</file>
+        <file>graphics/kela_destroyed.svg</file>
+        <file>graphics/plane_destroyed.svg</file>
+        <file>graphics/saab_destroyed.svg</file>
     </qresource>
 </RCC>

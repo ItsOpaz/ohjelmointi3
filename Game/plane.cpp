@@ -87,4 +87,15 @@ void Plane::move()
         break;
     }
 }
+
+void Plane::destroy()
+{
+    status_ = false;
+    setPixmap(QString(":/graphics/graphics/plane_destroyed.svg"));
+}
+
+bool Plane::status() const
+{
+    return status_;
+}
 }

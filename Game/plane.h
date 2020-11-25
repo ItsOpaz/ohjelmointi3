@@ -12,10 +12,14 @@ public:
     Plane();
     bool checkPos();
     void move();
+    void destroy();
+    bool status() const;
+
 private:
     int direction_;
     int speed_;
     int limit_;
+    bool status_;
 };
 }
 

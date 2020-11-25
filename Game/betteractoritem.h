@@ -17,10 +17,13 @@ public:
     void setBusColor();
     int points() const;
     void setPoints(int);
+    void destroy();
+    int status() const;
 
 protected:
     int points_;
     bool isStop_;
+    int status_ = true;
 };
 
 }

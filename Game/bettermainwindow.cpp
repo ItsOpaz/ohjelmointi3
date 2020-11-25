@@ -92,11 +92,13 @@ void BetterMainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 void BetterMainWindow::updateCoords(std::shared_ptr<Interface::IActor> actor)
 {
     auto it = std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;});
-    int x = it->second->giveLocation().giveX() + X_ADJUST;
-    int y = Y_ADJUST - it->second->giveLocation().giveY();
-    it->first->setCoord(x, y);
-    std::shared_ptr<CourseSide::Nysse> bus = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
-    it->first->setPoints(bus->getPassengers().size());
+    if(it->first->status()){
+        int x = it->second->giveLocation().giveX() + X_ADJUST;
+        int y = Y_ADJUST - it->second->giveLocation().giveY();
+        it->first->setCoord(x, y);
+        std::shared_ptr<CourseSide::Nysse> bus = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
+        it->first->setPoints(bus->getPassengers().size());
+    }
 }
 
 void BetterMainWindow::setPicture(QImage &img)
@@ -168,13 +170,20 @@ void BetterMainWindow::explosion(Bomb *bomb)
         }else if(dynamic_cast<Bomb *>(i)){
             break;
         }else if(dynamic_cast<Plane *>(i)){
-            collisionPoints += 15;
+            Plane *plane = dynamic_cast<Plane *>(i);
+            if(plane->status()){
+                plane->destroy();
+                collisionPoints += 15;
+                planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
+            }
         }else{
-            BetterActorItem *item = dynamic_cast<BetterActorItem*>(i);
-            collisionPoints += item->points();
+            BetterActorItem *item = dynamic_cast<BetterActorItem *>(i);
+            if(item->status()){
+                item->destroy();
+                collisionPoints += item->points();
+            }
         }
     }
-    totalPoints_ += collisionPoints;
     stats_->increase_score(collisionPoints);
     ui->lcdNumber_score_display->display(stats_->get_score().second);
     qDebug()<<"siinä luikahti"<<collisionPoints<<"bongoo taskuun ja näin";
@@ -266,6 +275,9 @@ void BetterMainWindow::update()
     for(auto plane : planes_){
         if(plane->checkPos()){
             plane->move();
+            if(plane->collidesWithItem(character_)){
+                //character_->crash(true);
+            }
         }else{
             planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
             map->removeItem(plane);

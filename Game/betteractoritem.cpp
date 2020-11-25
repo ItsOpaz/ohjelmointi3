@@ -57,4 +57,19 @@ void BetterActorItem::setPoints(int points)
     points_ = points;
     setBusColor();
 }
+
+void BetterActorItem::destroy()
+{
+    status_ = false;
+    if(isStop_){
+        setPixmap(QString(":/graphics/graphics/kela_destroyed.svg"));
+    }else{
+        setPixmap(QString(":/graphics/graphics/saab_destroyed.svg"));
+    }
+}
+
+int BetterActorItem::status() const
+{
+    return status_;
+}
 }
