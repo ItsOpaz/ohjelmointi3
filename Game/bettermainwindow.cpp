@@ -50,6 +50,7 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
 BetterMainWindow::~BetterMainWindow()
 {
     delete ui;
+    delete character_;
 }
 
 void BetterMainWindow::setSize(int w, int h)
@@ -149,6 +150,10 @@ void BetterMainWindow::explosion(Bomb *bomb)
     for(auto i : collisions){
         if(dynamic_cast<Character *>(i)){
             character_->crash(true);
+        }else if(dynamic_cast<Bomb *>(i)){
+            break;
+        }else if(dynamic_cast<Plane *>(i)){
+            break;
         }else{
             BetterActorItem *item = dynamic_cast<BetterActorItem*>(i);
             collisionPoints += item->points();
@@ -216,7 +221,6 @@ void BetterMainWindow::update()
 {
     //count of enemy planes is set here
     while(planes_.length() < 10){
-        qDebug()<<planes_.length();
         addPlane();
     }
     //character is moved and character crash will be checked
@@ -228,7 +232,6 @@ void BetterMainWindow::update()
             plane->move();
         }else{
             planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
-                    qDebug()<<map;
             map->removeItem(plane);
         }
     }
@@ -238,9 +241,7 @@ void BetterMainWindow::update()
             bomb->tick();
         }else{
             bombs_.erase(std::remove(bombs_.begin(), bombs_.end(), bomb), bombs_.end());
-                    qDebug()<<map;
             map->removeItem(bomb);
-            delete bomb;
         }
     }
 }

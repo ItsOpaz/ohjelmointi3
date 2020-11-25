@@ -8,9 +8,9 @@ Character::Character()
     :direction_(1)
 {
     //helicopter is set top of busstop and bus
-    setZValue(1);
+    setZValue(3);
     rotorPhase();
-    setScale(.1);
+    setScale(.15);
     //helicopter originpoint is set to center of boundingrect so rotating helicopter works
     setTransformOriginPoint(this->boundingRect().center());
     setPos(mapToParent(0, 0));

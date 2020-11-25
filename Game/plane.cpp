@@ -6,10 +6,10 @@ namespace Students {
 Plane::Plane()
 {
     //plane is set on top of bustops, busses and helicopter
-    setZValue(2);
+    setZValue(4);
     setScale(.1);
     direction_ = rand() % 4;
-    speed_ = rand() % 5 ;
+    speed_ = rand() % 5 + 1;
     //plane originpoint is set to center of boundingrect so rotating helicopter works
     setTransformOriginPoint(this->boundingRect().center());
     setTransformationMode(Qt::SmoothTransformation);
@@ -36,11 +36,14 @@ Plane::Plane()
         setRotation(90);
         break;
     }
-    default:
+    case 3:{
         limit_ = 0;
         int y = rand() % 550;
         setPos(mapToScene(1097, y));
         setRotation(270);
+        break;
+    }
+    default:
         break;
     }
 }
@@ -57,8 +60,10 @@ bool Plane::checkPos()
     case 2:
         if(this->scenePos().x() > limit_){return false;}
         return true;
-    default:
+    case 3:
         if(this->scenePos().x() < limit_){return false;}
+        return true;
+    default:
         return true;
     }
 }
@@ -75,8 +80,10 @@ void Plane::move()
     case 2:
         this->moveBy(speed_, 0);
         break;
-    default:
+    case 3:
         this->moveBy(-speed_, 0);
+        break;
+    default:
         break;
     }
 }

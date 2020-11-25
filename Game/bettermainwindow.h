@@ -17,7 +17,7 @@
 #include <map>
 
 const int X_ADJUST = 347;
-const int Y_ADJUST = 552;
+const int Y_ADJUST = 540;
 
 const int PADDING = 10;
 

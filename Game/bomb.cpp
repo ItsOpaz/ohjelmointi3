@@ -11,6 +11,7 @@ Bomb::Bomb(QPointF pos, int dir)
     setTransformOriginPoint(boundingRect().center());
     setTransformationMode(Qt::SmoothTransformation);
     setPos(pos);
+    setZValue(2);
     //dir 1 = North, 2 = South, 3 = East, 4 = West
     switch (dir) {
     case 1:

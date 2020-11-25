@@ -10,15 +10,18 @@ namespace Students {
 BetterActorItem::BetterActorItem(int x, int y, int points, bool isStop)
     :x_(x), y_(y), points_(points), isStop_(isStop)
 {
+    setTransformationMode(Qt::SmoothTransformation);
+    setPos(x_, y_);
     setTransformOriginPoint(boundingRect().center());
-//    setTransformationMode(Qt::SmoothTransformation);
-    setPos(mapToParent(x_, y_ ));
     if(isStop_){
+        setOffset(0, -150);
         setPixmap(QString(":/graphics/graphics/kela.svg"));
-        setScale(.1);
+        setScale(.07);
+        setZValue(0);
     }else{
         setBusColor();
-        setScale(.1);
+        setScale(.05);
+        setZValue(1);
     }
 }
 
