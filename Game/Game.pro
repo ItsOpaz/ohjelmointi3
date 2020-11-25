@@ -60,4 +60,5 @@ FORMS += \
     startwindow.ui
 
 RESOURCES += \
-    graphics.qrc
+    graphics.qrc \
+    sounds.qrc

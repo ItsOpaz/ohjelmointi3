@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>sounds/fortunate_son.wav</file>
+        <file>sounds/ei_onnistu.wav</file>
+        <file>sounds/noni.wav</file>
+        <file>sounds/kaksi.wav</file>
+        <file>sounds/kolme.wav</file>
+        <file>sounds/nelja.wav</file>
+        <file>sounds/nolla.wav</file>
+        <file>sounds/nollanollanolla.wav</file>
+        <file>sounds/viis.wav</file>
+        <file>sounds/yks.wav</file>
+        <file>sounds/jysahti.wav</file>
+    </qresource>
+</RCC>

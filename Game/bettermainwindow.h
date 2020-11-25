@@ -16,6 +16,7 @@
 #include <memory>
 #include <QVector>
 #include <map>
+#include <QSound>
 
 const int X_ADJUST = 347;
 const int Y_ADJUST = 540;
@@ -78,7 +79,6 @@ private:
     Character* character_;
     QVector<Bomb *> bombs_;
     statistics* stats_;
-
 
     int width_ = 1095; //pxls
     int height_ = 592;

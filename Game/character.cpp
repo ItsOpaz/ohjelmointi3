@@ -1,5 +1,6 @@
 #include "character.h"
 #include <QDebug>
+#include <QSound>
 
 namespace Students {
 
@@ -55,6 +56,7 @@ void Character::setDirection(int direction)
 
 void Character::crash()
 {
+    QSound::play(":/sounds/sounds/noni.wav");
     emit damage_recieved();
 }
 

@@ -13,6 +13,8 @@
 #include "plane.h"
 #include "gameover.h"
 
+QSound THEME(":/sounds/sounds/fortunate_son.wav");
+
 namespace Students {
 
 BetterMainWindow::BetterMainWindow(QWidget *parent) :
@@ -46,6 +48,7 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &BetterMainWindow::update);
         timer->start(tick_);
+        THEME.play();
     }
     else{
         close();
@@ -146,6 +149,8 @@ std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
 
 void BetterMainWindow::game_over()
 {
+    THEME.stop();
+    QSound::play(":/sounds/sounds/ei_onnistu.wav");
     Students::gameover end_window(this);
     end_window.exec();
     close();
@@ -183,6 +188,21 @@ void BetterMainWindow::explosion(Bomb *bomb)
                 collisionPoints += item->points();
             }
         }
+    }
+    if(collisionPoints == 0){
+        QSound::play(":/sounds/sounds/nollanollanolla.wav");
+    }else if(collisionPoints < 5){
+        QSound::play(":/sounds/sounds/nolla.wav");
+    }else if(collisionPoints < 10){
+        QSound::play(":/sounds/sounds/yks.wav");
+    }else if(collisionPoints < 15){
+        QSound::play(":/sounds/sounds/kaksi.wav");
+    }else if(collisionPoints < 20){
+        QSound::play(":/sounds/sounds/kolme.wav");
+    }else if(collisionPoints < 25){
+        QSound::play(":/sounds/sounds/nelja.wav");
+    }else{
+        QSound::play(":/sounds/sounds/viis.wav");
     }
     stats_->increase_score(collisionPoints);
     ui->lcdNumber_score_display->display(stats_->get_score().second);
@@ -240,8 +260,9 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
         }
         break;
     case Qt::Key_Space:{
-        //player is limited to 3 simultaneous bombs on the ground
-        if(bombs_.size() < 3){
+        //player is limited to 1 simultaneous bombs on the ground
+        if(bombs_.size() < 1){
+            QSound::play(":/sounds/sounds/jysahti.wav");
             auto bomb = character_->dropBomb();
             map->addItem(bomb);
             bombs_.append(bomb);
