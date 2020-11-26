@@ -12,6 +12,7 @@
 #include <QScrollBar>
 #include "plane.h"
 #include "gameover.h"
+#include "powerup.h"
 
 QSound THEME(":/sounds/sounds/helicopter.wav");
 
@@ -37,9 +38,7 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
         ui->gameView->QAbstractScrollArea::setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
         //set mousewheel event filter for gameview
         ui->gameView->viewport()->installEventFilter(this);
-
         ui->gameView->scale(4, 4);
-
         //set player name display and starting lifes amount
         ui->label_player_name->setText(stats_->get_score().first);
         ui->lcdNumber_lifes->display(stats_->get_lifes());
@@ -48,7 +47,15 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &BetterMainWindow::update);
         timer->start(tick_);
+        THEME.setLoops(QSound::Infinite);
         THEME.play();
+        addPowerup(1);
+        if(stats_->getDifficulty() == "easy"){
+            addPowerup(2);
+            addPowerup(2);
+        }else if(stats_->getDifficulty() == "medium"){
+            addPowerup(2);
+        }
     }
     else{
         close();
@@ -126,6 +133,14 @@ void BetterMainWindow::addPlane()
     map->addItem(plane);
 }
 
+void BetterMainWindow::addPowerup(int value)
+{
+    Powerup *powerup = new Powerup(value);
+    //powerups_.append(powerup);
+    map->addItem(powerup);
+}
+
+
 void BetterMainWindow::removeItem(std::shared_ptr<Interface::IActor> actor)
 {
     auto it = std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;});
@@ -182,6 +197,15 @@ void BetterMainWindow::explosion(Bomb *bomb)
                 collisionPoints += 15;
                 planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
             }
+        }else if(dynamic_cast<Powerup *>(i)){
+            Powerup *powerup = dynamic_cast<Powerup *>(i);
+            if(powerup->getType() == 1){
+                character_->transfrom();
+            }else{
+                planeCount = 0;
+            }
+            map->removeItem(i);
+
         }else{
             BetterActorItem *item = dynamic_cast<BetterActorItem *>(i);
             if(item->status()){
@@ -255,23 +279,27 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
     int dir = character_->direction();
     switch (event->key()) {
     case Qt::Key_W:
-        if(dir != 2){
+        if(dir != 2 || character_->getType() == 2){
             character_->setDirection(1);
+            character_->setRotation(0);
         }
         break;
     case Qt::Key_S:
-        if(dir != 1){
+        if(dir != 1 || character_->getType() == 2){
             character_->setDirection(2);
+            character_->setRotation(180);
         }
         break;
     case Qt::Key_A:
-        if(dir != 3){
+        if(dir != 3 || character_->getType() == 2){
             character_->setDirection(4);
+            character_->setRotation(270);
         }
         break;
     case Qt::Key_D:
-        if(dir != 4){
+        if(dir != 4 || character_->getType() == 2){
             character_->setDirection(3);
+            character_->setRotation(90);
         }
         break;
     case Qt::Key_Space:{
@@ -292,7 +320,7 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
         close();
     }
     default:
-
+        QSound::play(":/sounds/sounds/aah.wav");
         break;
     }
 }
@@ -303,7 +331,7 @@ void BetterMainWindow::update()
     //gameview is centered on player so map moves with player
     ui->gameView->centerOn(character_);
     //every 10 seconds planecount is increased
-    if(stats_->get_time() % 1000 == 0){
+    if(stats_->get_time() % 1000 == 0 && stats_->get_time() != 0){
         planeCount ++;
     }
     //planes will be added if not enough planes are in play

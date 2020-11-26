@@ -25,19 +25,15 @@ void Character::move()
     switch (direction_) {
     case 1:
         moveBy(0, -speed_);
-        this->setRotation(0);
         break;
     case 2:
         moveBy(0, speed_);
-        this->setRotation(180);
         break;
     case 3:
         moveBy(speed_, 0);
-        this->setRotation(90);
         break;
     case 4:
         moveBy(-speed_, 0);
-        this->setRotation(270);
         break;
     default:
         break;
@@ -84,20 +80,27 @@ void Character::planeHit(bool status)
 
 void Character::wallhit()
 {
-    if(this->pos().x() < -165 || this->pos().x() > 905 || this->pos().y() < -165 || this->pos().y() > 370){
+    if(this->pos().rx() < -165 || this->pos().rx() > 905 || this->pos().ry() < -165 || this->pos().ry() > 370){
         if(direction_ % 2 == 0){
             direction_ --;
         }else{
             direction_ ++;
         }
+        setRotation(rotation()+180);
         crash();
     }
 }
 
 void Character::transfrom()
 {
+    setScale(0.1);
     type_ = 2;
-    speed_ = 2;
+    speed_ = 1.5;
+}
+
+int Character::getType() const
+{
+    return type_;
 }
 
 

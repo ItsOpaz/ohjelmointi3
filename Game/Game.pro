@@ -15,6 +15,7 @@ SOURCES += \
     gameover.cpp \
     main.cc \
     plane.cpp \
+    powerup.cpp \
     startwindow.cpp \
     statistics.cpp
 
@@ -51,6 +52,7 @@ HEADERS += \
     creategame.h \
     gameover.h \
     plane.h \
+    powerup.h \
     startwindow.h \
     statistics.h
 

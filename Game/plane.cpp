@@ -16,26 +16,26 @@ Plane::Plane()
     setPixmap(QString(":/graphics/graphics/plane.svg"));
     switch (direction_) {
     case 0:{
-        int x = rand() % (X_HIGHEST + X_HIGHEST + 1) - X_LOWEST;
+        int x = rand() % (X_MAX + X_MIN + 1) - X_MIN;
         setPos(x, Y_MAX);
         setRotation(0);
         break;
     }
     case 1:{
-        int x = rand() % (X_HIGHEST + X_HIGHEST + 1) - X_LOWEST;
+        int x = rand() % (X_MAX + X_MIN + 1) - X_MIN;
         setPos(x, Y_MIN);
         setRotation(180);
         break;
     }
     case 2:{
-        int y = rand() % (Y_MAX + Y_MAX + 1) - Y_MIN;
-        setPos(X_LOWEST, y);
+        int y = rand() % (Y_MAX + Y_MIN + 1) - Y_MIN;
+        setPos(X_MIN, y);
         setRotation(90);
         break;
     }
     case 3:{
-        int y = rand() % (Y_MAX + Y_MAX + 1) - Y_MIN;
-        setPos(X_HIGHEST, y);
+        int y = rand() % (Y_MAX + Y_MIN + 1) - Y_MIN;
+        setPos(X_MAX, y);
         setRotation(270);
         break;
     }
@@ -46,7 +46,7 @@ Plane::Plane()
 
 bool Plane::checkPos()
 {
-    if(this->pos().x() < X_LOWEST || this->pos().x() > X_HIGHEST || this->pos().y() < Y_MIN || this->pos().y() > Y_MAX){
+    if(this->pos().x() < X_MIN || this->pos().x() > X_MAX || this->pos().y() < Y_MIN || this->pos().y() > Y_MAX){
         return false;
     }else{
         return true;

@@ -20,6 +20,7 @@ public:
     void planeHit(bool);
     void wallhit();
     void transfrom();
+    int getType() const;
 
 signals:
     void damage_recieved();
@@ -29,7 +30,7 @@ private:
     int phase_ = 1;
     bool planeHit_ = false;
     int type_ = 1;
-    int speed_ = 1;
+    double speed_ = 1;
 };
 }
 

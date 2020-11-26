@@ -8,6 +8,7 @@
 #include "bomb.h"
 #include "plane.h"
 #include "statistics.h"
+#include "powerup.h"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -46,6 +47,7 @@ public:
     void setPicture(QImage &img);
     void addCharacter();
     void addPlane();
+    void addPowerup(int);
     void removeItem(std::shared_ptr<Interface::IActor>);
     bool checkActor(std::shared_ptr<Interface::IActor>);
     std::vector<std::shared_ptr<Interface::IActor>> getActors();
@@ -74,6 +76,7 @@ private:
     QVector<Plane *> planes_;
     Character* character_;
     QVector<Bomb *> bombs_;
+    QVector<Powerup *> powerups_;
     statistics* stats_;
 
     int width_ = 1095; //pxls

@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 
-const int X_LOWEST = 0;
-const int X_HIGHEST = 1095;
+const int X_MIN = 0;
+const int X_MAX = 1095;
 const int Y_MIN = 0;
 const int Y_MAX = 592;
 

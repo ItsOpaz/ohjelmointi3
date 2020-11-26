@@ -12,5 +12,6 @@
         <file>sounds/jysahti.wav</file>
         <file>sounds/helicopter.wav</file>
         <file>sounds/wou.wav</file>
+        <file>sounds/aah.wav</file>
     </qresource>
 </RCC>
