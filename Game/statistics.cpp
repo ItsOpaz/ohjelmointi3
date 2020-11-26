@@ -41,6 +41,11 @@ void statistics::reduce_lifes()
     qDebug() << "lifes" << lifes_;
 }
 
+QString statistics::getDifficulty() const
+{
+    return difficulty_;
+}
+
 int statistics::get_bombs_amount()
 {
     return bombs_dropped_;

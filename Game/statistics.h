@@ -21,6 +21,7 @@ public:
     int get_buses_destroyed();
     int get_lifes();
     std::pair<QString, int> get_score();
+    QString getDifficulty() const;
 
 public slots:
     void reduce_lifes();

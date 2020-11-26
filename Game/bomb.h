@@ -13,6 +13,7 @@ public:
     void tick();
     void explode();
     bool status() const;
+    void setRadius(double value);
 
 signals:
     void bombExplosion(Bomb*);
@@ -20,6 +21,7 @@ signals:
 private:
     int phase_ = 300;
     bool status_ = true;
+    double radius;
 };
 }
 

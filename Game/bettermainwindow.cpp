@@ -23,7 +23,7 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
     stats_(new statistics)
 {
     Students::startwindow sw(this);
-    connect(&sw, &startwindow::infoSet, this, &BetterMainWindow::set_stat_info);
+    connect(&sw, &startwindow::infoSet, this, &BetterMainWindow::set_difficulty);
     if (sw.exec()) {
         ui->setupUi(this);
         map = new QGraphicsScene(this);
@@ -109,6 +109,7 @@ void BetterMainWindow::setPicture(QImage &img)
     map->setBackgroundBrush(img);
 }
 
+
 void BetterMainWindow::addCharacter()
 {
     character_ = new Character();
@@ -191,15 +192,15 @@ void BetterMainWindow::explosion(Bomb *bomb)
     }
     if(collisionPoints == 0){
         QSound::play(":/sounds/sounds/nollanollanolla.wav");
-    }else if(collisionPoints < 5){
+    }else if(collisionPoints < 3){
         QSound::play(":/sounds/sounds/nolla.wav");
-    }else if(collisionPoints < 10){
+    }else if(collisionPoints < 6){
         QSound::play(":/sounds/sounds/yks.wav");
-    }else if(collisionPoints < 15){
+    }else if(collisionPoints < 9){
         QSound::play(":/sounds/sounds/kaksi.wav");
-    }else if(collisionPoints < 20){
+    }else if(collisionPoints < 12){
         QSound::play(":/sounds/sounds/kolme.wav");
-    }else if(collisionPoints < 25){
+    }else if(collisionPoints < 15){
         QSound::play(":/sounds/sounds/nelja.wav");
     }else{
         QSound::play(":/sounds/sounds/viis.wav");
@@ -210,8 +211,18 @@ void BetterMainWindow::explosion(Bomb *bomb)
     qDebug()<<"tilastoja on tollai->"<<stats_->get_score();
 }
 
-void BetterMainWindow::set_stat_info(QString name, QString diff)
+void BetterMainWindow::set_difficulty(QString name, QString diff)
 {
+    if(diff == "easy"){
+        planeCount = 5;
+        bombRadius = .1;
+    }else if(diff == "medium"){
+        planeCount = 10;
+        bombRadius = .07;
+    }else if(diff == "hard"){
+        planeCount = 15;
+        bombRadius = .05;
+    }
     stats_->set_info(name, diff);
 }
 
@@ -264,6 +275,7 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
         if(bombs_.size() < 1){
             QSound::play(":/sounds/sounds/jysahti.wav");
             auto bomb = character_->dropBomb();
+            bomb->setRadius(bombRadius);
             map->addItem(bomb);
             bombs_.append(bomb);
             connect(bomb, SIGNAL(bombExplosion(Bomb*)), this, SLOT(explosion(Bomb*)));
@@ -284,9 +296,14 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
 
 void BetterMainWindow::update()
 {
+    //gameview is centered on player so map moves with player
     ui->gameView->centerOn(character_);
-    //count of enemy planes is set here
-    while(planes_.length() < PLANE_COUNT){
+    //every 10 seconds planecount is increased
+    if(stats_->get_time() % 1000 == 0){
+        planeCount ++;
+    }
+    //planes will be added if not enough planes are in play
+    while(planes_.length() < planeCount){
         addPlane();
     }
     //character is moved and character crash will be checked

@@ -47,7 +47,7 @@ void Bomb::tick()
 
 void Bomb::explode()
 {
-    setScale(.1);
+    setScale(radius);
     setRotation(0);
     setPixmap(QString(":/graphics/graphics/explosion.svg"));
     emit bombExplosion(this);
@@ -56,5 +56,10 @@ void Bomb::explode()
 bool Bomb::status() const
 {
     return status_;
+}
+
+void Bomb::setRadius(double value)
+{
+    radius = value;
 }
 }

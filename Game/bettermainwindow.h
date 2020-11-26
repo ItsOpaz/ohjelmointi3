@@ -23,8 +23,6 @@ const int Y_ADJUST = 540;
 
 const int PADDING = 10;
 
-const int PLANE_COUNT = 5;
-
 namespace Ui {
 class BetterMainWindow;
 }
@@ -54,18 +52,16 @@ public:
     void game_over();
     statistics* get_stats();
 
-
 signals:
     void gameStarted();
 
 public slots:
     void explosion(Bomb*);
-    void set_stat_info(QString, QString);
+    void set_difficulty(QString, QString);
     void damage_taken();
 
 private slots:
     void keyPressEvent(QKeyEvent*);
-
     void update();
     bool eventFilter(QObject *object, QEvent *event);
 
@@ -83,7 +79,9 @@ private:
     int width_ = 1095; //pxls
     int height_ = 592;
     int tick_ = 10; //ms
-    int totalPoints_ =  0;
+    int planeCount;
+    double bombRadius;
+
 };
 
 }
