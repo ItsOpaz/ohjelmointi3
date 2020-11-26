@@ -54,21 +54,19 @@ bool gameover::compare(QPair<QString, int>& a, QPair<QString, int>& b)
     return a.second < b.second;
 }
 
-QMap<QString, int> gameover::sort_highscore(QMap<QString, int>& unsorted)
+QList<QPair<QString, int>> gameover::sort_highscore(QMap<QString, int>& unsorted)
 {
-    QMap<int, QString> sort_map;
-    QMap<QString, int>::iterator sort_iter = unsorted.begin();
-    while(sort_iter!=unsorted.end()){
-        sort_map[sort_iter.value()] = sort_iter.key();
-        ++sort_iter;
+    QList<QPair<QString, int>> pair_list;
+    QMap<QString, int> sorted;
+    QMap<QString, int>::iterator iter = unsorted.begin();
+    while(iter!=unsorted.end()){
+        pair_list.append(qMakePair(iter.key(), iter.value()));
+        ++iter;
     }
-    QList<int> keys = sort_map.keys();
-    std::sort(keys.begin(), keys.end());
-    QMap<QString, int> sorted_higscores;
-    for (auto score : keys) {
-        sorted_higscores[sort_map[score]] = score;
-    }
-    return sorted_higscores;
+    std::sort(pair_list.begin(), pair_list.end(), [](auto &left, auto &right) {
+        return left.second > right.second;
+    });
+    return pair_list;
 }
 
 void gameover::display_highscores()
@@ -81,16 +79,15 @@ void gameover::display_highscores()
         highscores_[QString::fromStdString(row.at(0))] = std::stoi(row.at(1));
     }
 
-    QMap<QString, int> sorted_highscores = sort_highscore(highscores_);
+    QList<QPair<QString, int>> sorted_highscores = sort_highscore(highscores_);
 
     //Display score data stored in higscores map
-    QMap<QString, int>::iterator iter = sorted_highscores.begin();
-    while(iter!=sorted_highscores.end()){
-        QString listItem = iter.key() + ": " + QString::number(iter.value());
+    qDebug() << sorted_highscores;
+    for (auto i : sorted_highscores){
+        QString listItem = i.first + ": " + QString::number(i.second);
         List << listItem;
         model->setStringList(List);
         ui->listView_highscores->setModel(model);
-        ++iter;
     }
 }
 

@@ -28,7 +28,7 @@ public:
     std::vector<std::string> split(const std::string& s, const char delimiter, bool ignore_empty = false);
     bool compare(QPair<QString, int> &a,
                  QPair<QString, int> &b);
-    QMap<QString, int> sort_highscore(QMap<QString, int> &);
+    QList<QPair<QString, int> > sort_highscore(QMap<QString, int> &);
 
 private slots:
     void on_pushButton_quit_clicked();
