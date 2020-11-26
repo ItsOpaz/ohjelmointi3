@@ -82,7 +82,7 @@ void gameover::display_highscores()
     QList<QPair<QString, int>> sorted_highscores = sort_highscore(highscores_);
 
     //Display score data stored in higscores map
-    for (auto i : sorted_highscores){
+    for (const auto &i : qAsConst(sorted_highscores)){
         QString listItem = i.first + ": " + QString::number(i.second);
         List << listItem;
         model->setStringList(List);

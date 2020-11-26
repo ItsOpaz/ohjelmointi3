@@ -157,7 +157,7 @@ bool BetterMainWindow::checkActor(std::shared_ptr<Interface::IActor> actor)
 std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
 {
     std::vector<std::shared_ptr<Interface::IActor>> actors;
-    for(auto item : actorpairs_){
+    for(const auto &item : qAsConst(actorpairs_)){
         actors.push_back(item.second);
     }
     return actors;
@@ -185,7 +185,7 @@ void BetterMainWindow::explosion(Bomb *bomb)
     //pisteiden kannalta
     auto collisions = bomb->collidingItems();
     int collisionPoints = 0;
-    for(auto i : collisions){
+    for(auto i : qAsConst(collisions)){
         if(dynamic_cast<Character *>(i)){
             character_->crash();
         }else if(dynamic_cast<Bomb *>(i)){
@@ -208,7 +208,7 @@ void BetterMainWindow::explosion(Bomb *bomb)
 
         }else{
             BetterActorItem *item = dynamic_cast<BetterActorItem *>(i);
-            if(item->status()){
+            if(item != nullptr && item->status()){
                 item->destroy();
                 collisionPoints += item->points();
             }
@@ -343,7 +343,7 @@ void BetterMainWindow::update()
     character_->wallhit();
     character_->planeHit(false);
     //move enemyplanes
-    for(auto plane : planes_){
+    for(auto plane : qAsConst(planes_)){
         if(plane->checkPos()){
             plane->move();
             if(plane->collidesWithItem(character_)){
@@ -357,7 +357,7 @@ void BetterMainWindow::update()
         }
     }
     //active bombs will be ticked and inactive will be removed
-    for (auto bomb : bombs_){
+    for (auto bomb : qAsConst(bombs_)){
         if(bomb->status()){
             bomb->tick();
         }else{

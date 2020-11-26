@@ -71,7 +71,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 {
     std::vector<std::shared_ptr<Interface::IActor>> nearby;
     auto allActors = mw_->getActors();
-    for (auto actor : allActors){
+    for (const auto &actor : allActors){
         if(actor->giveLocation().isClose(loc)){
             nearby.push_back(actor);
         }
