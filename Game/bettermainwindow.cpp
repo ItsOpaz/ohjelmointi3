@@ -220,6 +220,10 @@ void BetterMainWindow::set_difficulty(QString name, QString diff)
     }else if(diff == "hard"){
         planeCount = 15;
         bombRadius = .05;
+    }else if(diff == "instakill"){
+        planeCount = 15;
+        bombRadius = .05;
+        stats_->set_lifes(1);
     }
     stats_->set_info(name, diff);
 }

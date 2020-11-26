@@ -16,6 +16,7 @@ public:
     void tick_counter();
     void read_highscore();
     void set_info(QString player_name, QString difficulty);
+    void set_lifes(int);
     int get_bombs_amount();
     int get_time();
     int get_buses_destroyed();

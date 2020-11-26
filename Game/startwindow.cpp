@@ -84,3 +84,8 @@ void Students::startwindow::on_pushButton_cancel_clicked()
 {
     reject();
 }
+
+void Students::startwindow::on_radioButton_instakill_clicked()
+{
+    setDifficulty("instakill");
+}

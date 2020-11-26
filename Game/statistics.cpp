@@ -35,6 +35,11 @@ void Students::statistics::set_info(QString player_name, QString difficulty)
     difficulty_ = difficulty;
 }
 
+void statistics::set_lifes(int amount)
+{
+    lifes_ = amount;
+}
+
 void statistics::reduce_lifes()
 {
     lifes_--;

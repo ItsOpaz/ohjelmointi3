@@ -34,6 +34,8 @@ private slots:
 
     void on_pushButton_cancel_clicked();
 
+    void on_radioButton_instakill_clicked();
+
 signals:
     void infoSet(QString name, QString difficulty);
 

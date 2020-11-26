@@ -49,11 +49,6 @@ std::vector<std::string> gameover::split(const std::string& s, const char delimi
     return result;
 }
 
-bool gameover::compare(QPair<QString, int>& a, QPair<QString, int>& b)
-{
-    return a.second < b.second;
-}
-
 QList<QPair<QString, int>> gameover::sort_highscore(QMap<QString, int>& unsorted)
 {
     QList<QPair<QString, int>> pair_list;
@@ -71,18 +66,22 @@ QList<QPair<QString, int>> gameover::sort_highscore(QMap<QString, int>& unsorted
 
 void gameover::display_highscores()
 {
-    //Read score data to a map
+
     std::ifstream file("highscores.csv");
     std::string line;
     while (std::getline(file, line)) {
         std::vector<std::string> row = split(line, ',');
-        highscores_[QString::fromStdString(row.at(0))] = std::stoi(row.at(1));
+        QString row_name = QString::fromStdString(row.at(0));
+        int row_score = std::stoi(row.at(1));
+        if ((highscores_.contains(row_name) && highscores_[row_name] < row_score) || !highscores_.contains(row_name)){
+            highscores_[row_name] = row_score;
+        }
+
     }
 
     QList<QPair<QString, int>> sorted_highscores = sort_highscore(highscores_);
 
     //Display score data stored in higscores map
-    qDebug() << sorted_highscores;
     for (auto i : sorted_highscores){
         QString listItem = i.first + ": " + QString::number(i.second);
         List << listItem;
@@ -96,6 +95,7 @@ void gameover::write_highscores()
 {
     std::fstream file;
     file.open("highscores.csv", std::ios_base::app);
+
     if (!file.is_open()) {
         qDebug() << "new file";
         std::ofstream file("highscores.csv");
@@ -103,12 +103,20 @@ void gameover::write_highscores()
         int score = stats_->get_score().second;
         file << name << ',' << score << "\n";
         file.close();
+        highscores_[QString::fromStdString(name)] = score;
     }else if (file.is_open()){
         qDebug() << "file opened";
-        std::string name = stats_->get_score().first.toStdString();
+        QString name = stats_->get_score().first;
+        std::string line;
+
+        //Write new score to file
+        std::string input_name = name.toStdString();
         int score = stats_->get_score().second;
-        file << name << ',' << score << "\n";
+        file << input_name << ',' << score << "\n";
         file.close();
+        }
+
+
     }
 }
 void Students::gameover::on_pushButton_quit_clicked()
@@ -117,5 +125,5 @@ void Students::gameover::on_pushButton_quit_clicked()
 }
 
 
-}
+
 
