@@ -19,6 +19,7 @@ public:
     Bomb* dropBomb();
     void planeHit(bool);
     void wallhit();
+    void transfrom();
 
 signals:
     void damage_recieved();
@@ -27,6 +28,8 @@ private:
     int direction_;
     int phase_ = 1;
     bool planeHit_ = false;
+    int type_ = 1;
+    int speed_ = 1;
 };
 }
 

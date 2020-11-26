@@ -3,10 +3,10 @@
         <file>graphics/saab1.svg</file>
         <file>graphics/saab2.svg</file>
         <file>graphics/saab3.svg</file>
-        <file>graphics/helicopter_phase1.svg</file>
-        <file>graphics/helicopter_phase2.svg</file>
-        <file>graphics/helicopter_phase3.svg</file>
-        <file>graphics/helicopter_phase4.svg</file>
+        <file>graphics/helicopter1_phase1.svg</file>
+        <file>graphics/helicopter1_phase2.svg</file>
+        <file>graphics/helicopter1_phase3.svg</file>
+        <file>graphics/helicopter1_phase4.svg</file>
         <file>graphics/bomb.svg</file>
         <file>graphics/explosion.svg</file>
         <file>graphics/kela.svg</file>
@@ -14,5 +14,11 @@
         <file>graphics/kela_destroyed.svg</file>
         <file>graphics/plane_destroyed.svg</file>
         <file>graphics/saab_destroyed.svg</file>
+        <file>graphics/helicopter2_phase1.svg</file>
+        <file>graphics/helicopter2_phase2.svg</file>
+        <file>graphics/helicopter2_phase3.svg</file>
+        <file>graphics/helicopter2_phase4.svg</file>
+        <file>graphics/powerup1.svg</file>
+        <file>graphics/powerup2.svg</file>
     </qresource>
 </RCC>

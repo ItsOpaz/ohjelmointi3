@@ -13,7 +13,7 @@
 #include "plane.h"
 #include "gameover.h"
 
-QSound THEME(":/sounds/sounds/fortunate_son.wav");
+QSound THEME(":/sounds/sounds/helicopter.wav");
 
 namespace Students {
 
@@ -234,9 +234,11 @@ void BetterMainWindow::damage_taken()
     switch (stats_->get_lifes()) {
     case 2:
         ui->lcdNumber_lifes->setPalette(Qt::yellow);
+        QSound::play(":/sounds/sounds/wou.wav");
         break;
     case 1:
         ui->lcdNumber_lifes->setPalette(Qt::red);
+        QSound::play(":/sounds/sounds/noni.wav");
         break;
     case 0:
         game_over();

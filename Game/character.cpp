@@ -24,19 +24,19 @@ void Character::move()
     //direction 1 = North, 2 = South, 3 = East, 4 = West
     switch (direction_) {
     case 1:
-        moveBy(0, -1);
+        moveBy(0, -speed_);
         this->setRotation(0);
         break;
     case 2:
-        moveBy(0, 1);
+        moveBy(0, speed_);
         this->setRotation(180);
         break;
     case 3:
-        moveBy(1, 0);
+        moveBy(speed_, 0);
         this->setRotation(90);
         break;
     case 4:
-        moveBy(-1, 0);
+        moveBy(-speed_, 0);
         this->setRotation(270);
         break;
     default:
@@ -56,28 +56,16 @@ void Character::setDirection(int direction)
 
 void Character::crash()
 {
-    QSound::play(":/sounds/sounds/noni.wav");
     emit damage_recieved();
 }
 
 void Character::rotorPhase()
 {
     //sets helicopter picture for every move so helicopter seems like it's flying
-    switch (phase_) {
-    case 1:
-        setPixmap(QString(":/graphics/graphics/helicopter_phase1.svg"));
-        break;
-    case 2:
-        setPixmap(QString(":/graphics/graphics/helicopter_phase2.svg"));
-        break;
-    case 3:
-        setPixmap(QString(":/graphics/graphics/helicopter_phase3.svg"));
-        break;
-    default:
-        setPixmap(QString(":/graphics/graphics/helicopter_phase4.svg"));
-        phase_ = 0;
-        break;
+    if(phase_ == 5){
+        phase_ = 1;
     }
+    setPixmap(QString(":/graphics/graphics/helicopter%1_phase%2.svg").arg(type_).arg(phase_));
     phase_ += 1;
 }
 
@@ -97,24 +85,19 @@ void Character::planeHit(bool status)
 void Character::wallhit()
 {
     if(this->pos().x() < -165 || this->pos().x() > 905 || this->pos().y() < -165 || this->pos().y() > 370){
-        switch (direction_) {
-        case 1:
-            direction_ = 2;
-            break;
-        case 2:
-            direction_ = 1;
-            break;
-        case 3:
-            direction_ = 4;
-            break;
-        case 4:
-            direction_ = 3;
-            break;
-        default:
-            break;
+        if(direction_ % 2 == 0){
+            direction_ --;
+        }else{
+            direction_ ++;
         }
         crash();
     }
+}
+
+void Character::transfrom()
+{
+    type_ = 2;
+    speed_ = 2;
 }
 
 
