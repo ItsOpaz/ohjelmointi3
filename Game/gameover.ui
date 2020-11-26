@@ -84,7 +84,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QListWidget" name="listWidget_highscore"/>
+     <widget class="QListView" name="listView_highscores">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

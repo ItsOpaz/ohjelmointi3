@@ -38,7 +38,6 @@ void Students::statistics::set_info(QString player_name, QString difficulty)
 void statistics::reduce_lifes()
 {
     lifes_--;
-    qDebug() << "lifes" << lifes_;
 }
 
 QString statistics::getDifficulty() const
@@ -64,7 +63,6 @@ int statistics::get_lifes()
 std::pair<QString, int> statistics::get_score()
 {
     std::pair<QString, int> score = {player_name_, score_};
-    qDebug() << score;
     return score;
 }
 }

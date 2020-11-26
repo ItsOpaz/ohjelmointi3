@@ -207,8 +207,6 @@ void BetterMainWindow::explosion(Bomb *bomb)
     }
     stats_->increase_score(collisionPoints);
     ui->lcdNumber_score_display->display(stats_->get_score().second);
-    qDebug()<<"siinä luikahti"<<collisionPoints<<"bongoo taskuun ja näin";
-    qDebug()<<"tilastoja on tollai->"<<stats_->get_score();
 }
 
 void BetterMainWindow::set_difficulty(QString name, QString diff)

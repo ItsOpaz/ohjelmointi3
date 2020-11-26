@@ -61,4 +61,6 @@ FORMS += \
 
 RESOURCES += \
     graphics.qrc \
-    sounds.qrc
+    sounds.qrc \
+
+DISTFILES +=

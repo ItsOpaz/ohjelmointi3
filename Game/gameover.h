@@ -4,6 +4,12 @@
 #include <QDialog>
 #include "statistics.h"
 #include "bettermainwindow.h"
+#include "QMap"
+#include <QFile>
+#include <QStringList>
+#include <QStringListModel>
+#include <QAbstractItemView>
+#include <QPair>
 
 namespace Ui {
 class gameover;
@@ -17,6 +23,12 @@ class gameover : public QDialog
 public:
     gameover(BetterMainWindow *parent);
     ~gameover();
+    void write_highscores();
+    void display_highscores();
+    std::vector<std::string> split(const std::string& s, const char delimiter, bool ignore_empty = false);
+    bool compare(QPair<QString, int> &a,
+                 QPair<QString, int> &b);
+    QMap<QString, int> sort_highscore(QMap<QString, int> &);
 
 private slots:
     void on_pushButton_quit_clicked();
@@ -24,6 +36,10 @@ private slots:
 private:
     Ui::gameover *ui;
     statistics* stats_;
+    QMap<QString, int> highscores_;
+    QStringListModel *model;
+    QStringList List;
+
 };
 }
 
