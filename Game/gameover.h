@@ -39,11 +39,12 @@ private:
     QMap<QString, int> highscores_;
     QStringListModel *model;
     QStringList List;
+    std::string filename_;
 
-    const std::string EASY_FILE = "highscores_easy.csv";
-    const std::string MEDIUM_FILE = "highscores_medium.csv";
-    const std::string HARD_FILE = "highscores_hard.csv";
-    const std::string INSTAGIB_FILE = "highscores_instagib.csv";
+    std::string EASY_FILE = "highscores_easy.csv";
+    std::string MEDIUM_FILE = "highscores_medium.csv";
+    std::string HARD_FILE = "highscores_hard.csv";
+    std::string INSTAGIB_FILE = "highscores_instagib.csv";
 
 };
 }

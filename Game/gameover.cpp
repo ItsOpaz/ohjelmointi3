@@ -21,8 +21,30 @@ gameover::gameover(BetterMainWindow *parent) :
     ui->lcdNumber_score->display(stats_->get_score().second);
     ui->lcdNumber_bombs->display(stats_->get_bombs_amount());
     model = new QStringListModel(this);
+    QString diff = stats_->getDifficulty();
+
+    if (diff == "easy"){
+        filename_ = EASY_FILE;
+        ui->label_highscore->setText("Higscores for easy");
+    }
+    else if (diff == "medium"){
+        filename_ = MEDIUM_FILE;
+        ui->label_highscore->setText("Higscores for medium");
+    }
+    else if (diff == "hard"){
+        filename_ = HARD_FILE;
+        ui->label_highscore->setText("Higscores for hard");
+    }
+    else if (diff == "instagib"){
+        filename_ = INSTAGIB_FILE;
+        ui->label_highscore->setText("Higscores for instagib");
+    }else{
+        filename_ = "highscore.csv";
+    }
+
+
     write_highscores();
-    display_highscores();
+
 }
 
 gameover::~gameover()
@@ -67,9 +89,9 @@ QList<QPair<QString, int>> gameover::sort_highscore(QMap<QString, int>& unsorted
 
 void gameover::display_highscores()
 {
-
-    std::ifstream file("highscores.csv");
+    std::ifstream file(filename_);
     std::string line;
+    qDebug() << QString::fromStdString(filename_);
     while (std::getline(file, line)) {
         std::vector<std::string> row = split(line, ',');
         QString row_name = QString::fromStdString(row.at(0));
@@ -93,12 +115,15 @@ void gameover::display_highscores()
 
 void gameover::write_highscores()
 {
+
+
     std::fstream file;
-    file.open("highscores.csv", std::ios_base::app);
+    file.open(filename_, std::ios_base::app);
+    qDebug() << QString::fromStdString(filename_);
 
     if (!file.is_open()) {
         qDebug() << "new file";
-        std::ofstream file("highscores.csv");
+        std::ofstream file(filename_);
         std::string name = stats_->get_score().first.toStdString();
         int score = stats_->get_score().second;
         file << name << ',' << score << "\n";
@@ -115,7 +140,7 @@ void gameover::write_highscores()
         file.close();
         }
 
-
+        display_highscores();
     }
 }
 void Students::gameover::on_pushButton_quit_clicked()
