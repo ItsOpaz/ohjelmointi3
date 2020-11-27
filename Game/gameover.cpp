@@ -19,6 +19,7 @@ gameover::gameover(BetterMainWindow *parent) :
     ui->setupUi(this);
     stats_ = parent->get_stats();
     ui->lcdNumber_score->display(stats_->get_score().second);
+    ui->lcdNumber_bombs->display(stats_->get_bombs_amount());
     model = new QStringListModel(this);
     write_highscores();
     display_highscores();

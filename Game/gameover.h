@@ -40,6 +40,11 @@ private:
     QStringListModel *model;
     QStringList List;
 
+    const std::string EASY_FILE = "highscores_easy.csv";
+    const std::string MEDIUM_FILE = "highscores_medium.csv";
+    const std::string HARD_FILE = "highscores_hard.csv";
+    const std::string INSTAGIB_FILE = "highscores_instagib.csv";
+
 };
 }
 
