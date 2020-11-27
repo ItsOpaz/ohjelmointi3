@@ -72,7 +72,7 @@ void Students::startwindow::on_radioButton_easy_clicked()
 
 void Students::startwindow::on_radioButton_medium_clicked()
 {
-        setDifficulty("medium");
+    setDifficulty("medium");
 }
 
 void Students::startwindow::on_radioButton_hard_clicked()
