@@ -19,6 +19,8 @@ private Q_SLOTS:
     void set_info();
     void reduce_life();
     void check_score();
+    void add_ticks();
+    void drop_bomb();
 
 };
 
@@ -76,6 +78,19 @@ void GameTest::check_score(){
     QCOMPARE(stats.get_score(), result_info);
 }
 
+void GameTest::add_ticks(){
+    Students::statistics stats;
+    QCOMPARE(stats.get_time(), 0u);
+    stats.tick_counter();
+    QCOMPARE(stats.get_time(), 1u);
+}
+
+void GameTest::drop_bomb(){
+    Students::statistics stats;
+    QCOMPARE(stats.get_bombs_amount(), 0);
+    stats.bomb_dropped();
+    QCOMPARE(stats.get_bombs_amount(), 1);
+}
 
 QTEST_APPLESS_MAIN(GameTest)
 
