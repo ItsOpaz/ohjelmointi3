@@ -16,7 +16,7 @@ public:
     void setRadius(double value);
 
 signals:
-    void bombExplosion(Students::Bomb*);
+    void bombExplosion(Bomb*);
 
 private:
     int phase_ = 300;

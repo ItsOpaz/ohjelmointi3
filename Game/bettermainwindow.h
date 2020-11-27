@@ -58,7 +58,7 @@ signals:
     void gameStarted();
 
 public slots:
-    void explosion(Students::Bomb*);
+    void explosion(Bomb*);
     void set_difficulty(QString, QString);
     void damage_taken();
 
