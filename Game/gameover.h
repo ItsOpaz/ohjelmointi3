@@ -39,6 +39,7 @@ private:
     QMap<QString, int> highscores_;
     QStringListModel *model;
     QStringList List;
+    QString filename_init_;
     std::string filename_;
 
     std::string EASY_FILE = "highscores_easy.csv";

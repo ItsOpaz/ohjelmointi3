@@ -22,25 +22,11 @@ gameover::gameover(BetterMainWindow *parent) :
     ui->lcdNumber_bombs->display(stats_->get_bombs_amount());
     model = new QStringListModel(this);
     QString diff = stats_->getDifficulty();
+    filename_init_ = QString("highscores_%1.csv").arg(diff);
+    qDebug()<<filename_init_;
+    filename_ = filename_init_.toStdString();
+    ui->label_highscore->setText(QString("Higscores for %1").arg(diff));
 
-    if (diff == "easy"){
-        filename_ = EASY_FILE;
-        ui->label_highscore->setText("Higscores for easy");
-    }
-    else if (diff == "medium"){
-        filename_ = MEDIUM_FILE;
-        ui->label_highscore->setText("Higscores for medium");
-    }
-    else if (diff == "hard"){
-        filename_ = HARD_FILE;
-        ui->label_highscore->setText("Higscores for hard");
-    }
-    else if (diff == "instagib"){
-        filename_ = INSTAGIB_FILE;
-        ui->label_highscore->setText("Higscores for instagib");
-    }else{
-        filename_ = "highscore.csv";
-    }
 
 
     write_highscores();
