@@ -76,7 +76,6 @@ void gameover::display_highscores()
         if ((highscores_.contains(row_name) && highscores_[row_name] < row_score) || !highscores_.contains(row_name)){
             highscores_[row_name] = row_score;
         }
-
     }
 
     QList<QPair<QString, int>> sorted_highscores = sort_highscore(highscores_);
@@ -107,7 +106,6 @@ void gameover::write_highscores()
     }else if (file.is_open()){
         qDebug() << "file opened";
         QString name = stats_->get_score().first;
-        std::string line;
 
         //Write new score to file
         std::string input_name = name.toStdString();
