@@ -72,13 +72,13 @@ private:
     Ui::BetterMainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
-    QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IStop>>> stoppairs_;
+    QMap<std::shared_ptr<Interface::IActor>, BetterActorItem *> actorpairs_;
+    QMap<std::shared_ptr<Interface::IStop>, BetterActorItem *> stoppairs_;
     Character* character_;
     statistics* stats_;
 
     int width_ = 1095; //pxls
-    int height_ = 592;
+    int height_ = 592; //pxls
     int tick_ = 10; //ms
     int planeCount;
     int planesActive_ = 0;

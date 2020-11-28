@@ -85,7 +85,7 @@ void BetterMainWindow::addActor(std::shared_ptr<Interface::IActor> newActor)
     int x = newActor->giveLocation().giveX() + X_ADJUST;
     int y = Y_ADJUST - newActor->giveLocation().giveY();
     BetterActorItem* nActor = new BetterActorItem(x, y, 0, false);
-    actorpairs_.push_back(std::make_pair(nActor, newActor));
+    actorpairs_.insert(newActor, nActor);
     map->addItem(nActor);
 }
 
@@ -94,7 +94,7 @@ void BetterMainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
     int x = stop->getLocation().giveX() + X_ADJUST;
     int y = Y_ADJUST - stop->getLocation().giveY();
     BetterActorItem* nStop = new BetterActorItem(x, y, 1, true);
-    stoppairs_.push_back(std::make_pair(nStop, stop));
+    stoppairs_.insert(stop, nStop);
     map->addItem(nStop);
 }
 
@@ -102,13 +102,12 @@ void BetterMainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void BetterMainWindow::updateCoords(std::shared_ptr<Interface::IActor> actor)
 {
-    auto it = std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;});
-    if(it->first->status()){
-        int x = it->second->giveLocation().giveX() + X_ADJUST;
-        int y = Y_ADJUST - it->second->giveLocation().giveY();
-        it->first->setCoord(x, y);
+    if(actorpairs_[actor]->status()){
+        int x = actor->giveLocation().giveX() + X_ADJUST;
+        int y = Y_ADJUST - actor->giveLocation().giveY();
+        actorpairs_[actor]->setCoord(x,y);
         std::shared_ptr<CourseSide::Nysse> bus = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
-        it->first->setPoints(bus->getPassengers().size());
+        actorpairs_[actor]->setPoints(bus->getPassengers().size());
     }
 }
 
@@ -151,24 +150,22 @@ void BetterMainWindow::addPowerup(int value)
 
 void BetterMainWindow::removeItem(std::shared_ptr<Interface::IActor> actor)
 {
-    auto it = std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;});
-    it->second->remove();
-    map->removeItem(it->first);
-    actorpairs_.erase(it);
+    actorpairs_.remove(actor);
 }
 
 bool BetterMainWindow::checkActor(std::shared_ptr<Interface::IActor> actor)
 {
-    return (std::find_if(actorpairs_.begin(), actorpairs_.end(), [&actor](const std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>& element){ return element.second == actor;}) != actorpairs_.end());
+    if(actorpairs_.find(actor) == actorpairs_.end()){
+        return false;
+    }else{
+        return true;
+    }
+
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
 {
-    std::vector<std::shared_ptr<Interface::IActor>> actors;
-    for(const auto &item : qAsConst(actorpairs_)){
-        actors.push_back(item.second);
-    }
-    return actors;
+    return actorpairs_.keys().toVector().toStdVector();
 }
 
 void BetterMainWindow::game_over()
