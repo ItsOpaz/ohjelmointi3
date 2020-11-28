@@ -15,6 +15,7 @@
 #include "powerup.h"
 
 QSound THEME(":/sounds/sounds/helicopter.wav");
+QSound WRONG(":/sounds/sounds/aah.wav");
 
 namespace Students {
 
@@ -122,21 +123,28 @@ void BetterMainWindow::addCharacter()
     character_ = new Character();
     map->addItem(character_);
     ui->gameView->centerOn(character_);
-    connect(character_, &Character::damage_recieved, stats_, &statistics::reduce_lifes);
     connect(character_, &Character::damage_recieved, this, &BetterMainWindow::damage_taken);
 }
 
 void BetterMainWindow::addPlane()
 {
     Plane *plane = new Plane();
-    planes_.append(plane);
+    connect(timer, &QTimer::timeout, plane, &Plane::move);
+    connect(plane, &Plane::removePlane, this, &BetterMainWindow::planeRemoved);
+    ++planesActive_;
     map->addItem(plane);
+}
+
+void BetterMainWindow::planeRemoved(Plane *plane)
+{
+    map->removeItem(plane);
+    delete plane;
+    --planesActive_;
 }
 
 void BetterMainWindow::addPowerup(int value)
 {
     Powerup *powerup = new Powerup(value);
-    //powerups_.append(powerup);
     map->addItem(powerup);
 }
 
@@ -179,39 +187,30 @@ statistics *BetterMainWindow::get_stats()
 
 void BetterMainWindow::explosion(Bomb *bomb)
 {
-    //tähän settii mite pisteet lasketaa osumista
-    //collisions vektori palauttaa kaikki grafiikkaitemit joihin pommi osuu
-    //dynamic_pointer_cast varmaa loistava ratkasu, jolla saa myös nysse luokan methodit käyttöön (getPassengers)
-    //pisteiden kannalta
+    bombActive_ = false;
     auto collisions = bomb->collidingItems();
     int collisionPoints = 0;
     for(auto i : qAsConst(collisions)){
-        if(dynamic_cast<Character *>(i)){
-            character_->crash();
-        }else if(dynamic_cast<Bomb *>(i)){
-            break;
-        }else if(dynamic_cast<Plane *>(i)){
-            Plane *plane = dynamic_cast<Plane *>(i);
+        if(auto item = dynamic_cast<BetterActorItem *>(i)){
+            if(item != nullptr && item->status()){
+                item->destroy();
+                collisionPoints += item->points();
+            }
+        }else if(auto plane = dynamic_cast<Plane *>(i)){
             if(plane->status()){
                 plane->destroy();
                 collisionPoints += 15;
-                planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
+                --planesActive_;
             }
-        }else if(dynamic_cast<Powerup *>(i)){
-            Powerup *powerup = dynamic_cast<Powerup *>(i);
+        }else if(auto powerup = dynamic_cast<Powerup *>(i)){
             if(powerup->getType() == 1){
                 character_->transfrom();
             }else{
                 planeCount = 0;
             }
             map->removeItem(i);
-
-        }else{
-            BetterActorItem *item = dynamic_cast<BetterActorItem *>(i);
-            if(item != nullptr && item->status()){
-                item->destroy();
-                collisionPoints += item->points();
-            }
+        }else if(dynamic_cast<Character *>(i)){
+            character_->crash();
         }
     }
     if(collisionPoints == 0){
@@ -254,6 +253,7 @@ void BetterMainWindow::set_difficulty(QString name, QString diff)
 
 void BetterMainWindow::damage_taken()
 {
+    stats_->reduce_lifes();
     ui->lcdNumber_lifes->display(stats_->get_lifes());
     switch (stats_->get_lifes()) {
     case 2:
@@ -275,7 +275,8 @@ void BetterMainWindow::damage_taken()
 
 void BetterMainWindow::keyPressEvent(QKeyEvent *event)
 {
-    //dir 1 = North, 2 = South, 3 = East, 4 = West
+    //character is given direction and rotation for every correct keyevent
+    //dir 1(W) = North, 2(S) = South, 3(D) = East, (A)4 = West
     int dir = character_->direction();
     switch (event->key()) {
     case Qt::Key_W:
@@ -302,25 +303,33 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
             character_->setRotation(90);
         }
         break;
+    //space key drops bomb if possible
     case Qt::Key_Space:{
-        //player is limited to 1 simultaneous bombs on the ground
-        if(bombs_.size() < 1){
+        //if bomb is active, no more bombs can be dropped
+        if(!bombActive_){
             QSound::play(":/sounds/sounds/jysahti.wav");
+            //bomb is created in character class, character will give bomb rotation and position
             auto bomb = character_->dropBomb();
             bomb->setRadius(bombRadius);
             map->addItem(bomb);
-            bombs_.append(bomb);
+            //timer is connected to bomb tick
+            connect(timer, &QTimer::timeout, bomb, &Bomb::tick);
             connect(bomb, SIGNAL(bombExplosion(Bomb*)), this, SLOT(explosion(Bomb*)));
             stats_->bomb_dropped();
             ui->lcdNumber_bombs_dropped->display(stats_->get_bombs_amount());
+            bombActive_ = true;
         }
         break;
         }
+    //esc closes mainwindow
     case Qt::Key_Escape:{
         close();
     }
     default:
-        QSound::play(":/sounds/sounds/aah.wav");
+        //if wrong button is pressed, sound will be played
+        if(WRONG.isFinished()){
+            WRONG.play();
+        }
         break;
     }
 }
@@ -331,38 +340,26 @@ void BetterMainWindow::update()
     //gameview is centered on player so map moves with player
     ui->gameView->centerOn(character_);
     //every 10 seconds planecount is increased
-    if(stats_->get_time() % 1000 == 0 && stats_->get_time() != 0){
-        planeCount ++;
+    if(stats_->get_time() % 500 == 0 && stats_->get_time() != 0){
+        ++planeCount;
     }
     //planes will be added if not enough planes are in play
-    while(planes_.length() < planeCount){
+    while(planesActive_ < planeCount){
         addPlane();
     }
     //character is moved and character crash will be checked
     character_->move();
     character_->wallhit();
-    character_->planeHit(false);
-    //move enemyplanes
-    for(auto plane : qAsConst(planes_)){
-        if(plane->checkPos()){
-            plane->move();
-            if(plane->collidesWithItem(character_)){
-                plane->destroy();
-                planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
-                character_->planeHit(true);
+    //collisions with enemy planes will be checked
+    if(!character_->collidingItems().empty()){
+        for(auto item : character_->collidingItems()){
+            if(auto plane = dynamic_cast<Plane *>(item)){
+                if(plane->status()){
+                    plane->destroy();
+                    character_->crash();
+                    --planesActive_;
+                }
             }
-        }else{
-            planes_.erase(std::remove(planes_.begin(), planes_.end(), plane), planes_.end());
-            map->removeItem(plane);
-        }
-    }
-    //active bombs will be ticked and inactive will be removed
-    for (auto bomb : qAsConst(bombs_)){
-        if(bomb->status()){
-            bomb->tick();
-        }else{
-            bombs_.erase(std::remove(bombs_.begin(), bombs_.end(), bomb), bombs_.end());
-            map->removeItem(bomb);
         }
     }
     stats_->tick_counter();

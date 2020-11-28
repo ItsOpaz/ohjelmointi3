@@ -3,43 +3,28 @@
 
 namespace Students {
 
-Bomb::Bomb(QPointF pos, int dir)
+Bomb::Bomb(QPointF pos, qreal rotation)
 {
-    //bomb gets position and direction from helicopter
+    //bomb gets position and rotation from helicopter
     setScale(.07);
     setPixmap(QString(":/graphics/graphics/bomb.svg"));
     setTransformOriginPoint(boundingRect().center());
     setTransformationMode(Qt::SmoothTransformation);
     setPos(pos);
     setZValue(2);
-    //dir 1 = North, 2 = South, 3 = East, 4 = West
-    switch (dir) {
-    case 1:
-        setRotation(0);
-        break;
-    case 2:
-        setRotation(180);
-        break;
-    case 3:
-        setRotation(90);
-        break;
-    case 4:
-        setRotation(270);
-        break;
-    default:
-        break;
-    }
-
+    setRotation(rotation);
 }
 
 void Bomb::tick()
 {
+    //1 second after explosion bomb will be deleted
     if(phase_ == 0){
-        status_ = false;
+        delete this;
+    //when bomb reaches 200 ticks(2 seconds) it explodes
     }else if(phase_ == 100){
         explode();
+    //bomb is scaled smaller every tick so it seems like its dropping
     }else if(phase_ > 100){
-        //bomb is scaled smaller every tick so it seems like its dropping
         setScale(.07 * phase_/300);
     }
     phase_ -= 1;

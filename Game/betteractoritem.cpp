@@ -1,9 +1,4 @@
 #include "betteractoritem.h"
-#include "interfaces/istop.hh"
-#include "interfaces/ipassenger.hh"
-#include "interfaces/ivehicle.hh"
-
-#include <QDebug>
 
 namespace Students {
 
@@ -54,12 +49,14 @@ int BetterActorItem::points() const
 
 void BetterActorItem::setPoints(int points)
 {
+    //everytime bus points are modified, buscolor will be adjusted
     points_ = points;
     setBusColor();
 }
 
 void BetterActorItem::destroy()
 {
+    //item set inactive and pixmap is set
     status_ = false;
     if(isStop_){
         setPixmap(QString(":/graphics/graphics/kela_destroyed.svg"));

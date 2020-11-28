@@ -61,6 +61,7 @@ public slots:
     void explosion(Bomb*);
     void set_difficulty(QString, QString);
     void damage_taken();
+    void planeRemoved(Plane *);
 
 private slots:
     void keyPressEvent(QKeyEvent*);
@@ -73,16 +74,15 @@ private:
     QTimer *timer;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IActor>>> actorpairs_;
     QVector<std::pair<BetterActorItem*, std::shared_ptr<Interface::IStop>>> stoppairs_;
-    QVector<Plane *> planes_;
     Character* character_;
-    QVector<Bomb *> bombs_;
-    QVector<Powerup *> powerups_;
     statistics* stats_;
 
     int width_ = 1095; //pxls
     int height_ = 592;
     int tick_ = 10; //ms
     int planeCount;
+    int planesActive_ = 0;
+    bool bombActive_ = false;
     double bombRadius;
 
 };

@@ -12,7 +12,7 @@ Character::Character()
     setZValue(3);
     rotorPhase();
     setScale(.15);
-    //helicopter originpoint is set to center of boundingrect so rotating helicopter works
+    //helicopter originpoint is set to center of boundingrect so rotating helicopter is smooth
     setTransformOriginPoint(this->boundingRect().center());
     setPos(mapToParent(0, 0));
     setTransformationMode(Qt::SmoothTransformation);
@@ -57,35 +57,28 @@ void Character::crash()
 
 void Character::rotorPhase()
 {
-    //sets helicopter picture for every move so helicopter seems like it's flying
-    if(phase_ == 5){
-        phase_ = 1;
-    }
     setPixmap(QString(":/graphics/graphics/helicopter%1_phase%2.svg").arg(type_).arg(phase_));
-    phase_ += 1;
+    if(phase_ == 4){
+        phase_ = 1;
+    }else{
+        ++phase_;
+    }
 }
 
 Bomb *Character::dropBomb()
 {
-    return new Bomb(this->pos(), direction());
-}
-
-void Character::planeHit(bool status)
-{
-    if(planeHit_ != status && planeHit_ == false){
-        crash();
-    }
-    planeHit_ = status;
+    return new Bomb(this->pos(), rotation());
 }
 
 void Character::wallhit()
 {
-    if(this->pos().rx() < -165 || this->pos().rx() > 905 || this->pos().ry() < -165 || this->pos().ry() > 370){
+    if(pos().x() < HX_MIN || pos().x() > HX_MAX || pos().y() < HY_MIN || pos().y() > HY_MAX){
         if(direction_ % 2 == 0){
             direction_ --;
         }else{
             direction_ ++;
         }
+        //helicopter is rotated 180 and helicopter will crash
         setRotation(rotation()+180);
         crash();
     }

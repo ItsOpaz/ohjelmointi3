@@ -11,14 +11,23 @@ const int Y_MAX = 592;
 
 namespace Students {
 
-class Plane : public QGraphicsPixmapItem
+class Plane : public QObject, public QGraphicsPixmapItem
 {
+    Q_OBJECT
 public:
     Plane();
+    //if plane flies out of map it will be removed and removePlane will be emitted
     bool checkPos();
-    void move();
     void destroy();
     bool status() const;
+
+signals:
+    //remove plane signal will emit to bettermainwindow planeremoved slot
+    void removePlane(Plane *);
+
+public slots:
+    //plane is moved every timer tick to correct direction
+    void move();
 
 private:
     int direction_;

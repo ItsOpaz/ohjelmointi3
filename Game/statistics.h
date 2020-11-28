@@ -6,9 +6,8 @@
 
 namespace Students {
 
-class statistics : public QObject
+class statistics
 {
-    Q_OBJECT
 public:
     statistics();
     void increase_score(int amount);
@@ -23,8 +22,6 @@ public:
     int get_lifes();
     std::pair<QString, int> get_score();
     QString getDifficulty() const;
-
-public slots:
     void reduce_lifes();
 
 private:
