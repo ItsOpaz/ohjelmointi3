@@ -11,7 +11,6 @@ CreateGame::CreateGame():
     logic_->fileConfig();
     city_->takeMainWindow(mainwindow_);
     logic_->takeCity(city_);
-
     city_->setBackground(smallMap, bigMap);
 }
 

@@ -4,14 +4,17 @@
 #include "core/logic.hh"
 #include "city.h"
 #include "bettermainwindow.h"
+#include <QObject>
 
 namespace Students {
 
-class CreateGame
+class CreateGame : public QObject
 {
+    Q_OBJECT
 public:
     CreateGame();
     void StartGame();
+
 private:
     std::unique_ptr<CourseSide::Logic> logic_;
     std::shared_ptr<Students::City> city_;

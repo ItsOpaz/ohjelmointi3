@@ -59,7 +59,7 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
         }
     }
     else{
-        close();
+        qApp->quit();
     }
 }
 
@@ -165,7 +165,11 @@ bool BetterMainWindow::checkActor(std::shared_ptr<Interface::IActor> actor)
 
 std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
 {
-    return actorpairs_.keys().toVector().toStdVector();
+    std::vector<std::shared_ptr<Interface::IActor> > actors;
+    for (auto actor : actorpairs_.keys()){
+        actors.push_back(actor);
+    }
+    return actors;
 }
 
 void BetterMainWindow::game_over()
@@ -322,6 +326,7 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
     //esc closes mainwindow
     case Qt::Key_Escape:{
         close();
+        break;
     }
     default:
         //if wrong button is pressed, sound will be played
