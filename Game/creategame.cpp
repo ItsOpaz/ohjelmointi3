@@ -1,8 +1,5 @@
 #include "creategame.h"
 
-QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
-
 namespace Students
 {
 CreateGame::CreateGame():
@@ -14,6 +11,7 @@ CreateGame::CreateGame():
     logic_->fileConfig();
     city_->takeMainWindow(mainwindow_);
     logic_->takeCity(city_);
+
     city_->setBackground(smallMap, bigMap);
 }
 

@@ -27,11 +27,11 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
     bool takeMainWindow(std::shared_ptr<Students::BetterMainWindow>);
+
 private:
     QTime clock_;
     QImage background_;
     std::shared_ptr<Students::BetterMainWindow> mw_;
-    bool gameStatus_ = false;
 };
 }
 

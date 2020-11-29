@@ -171,6 +171,7 @@ std::vector<std::shared_ptr<Interface::IActor> > BetterMainWindow::getActors()
 void BetterMainWindow::game_over()
 {
     THEME.stop();
+    gameOver_ = true;
     QSound::play(":/sounds/sounds/ei_onnistu.wav");
     Students::gameover end_window(this);
     end_window.exec();
@@ -369,6 +370,11 @@ bool BetterMainWindow::eventFilter(QObject *object, QEvent *event)
         return true;
     }
     return false;
+}
+
+int BetterMainWindow::getGameOver() const
+{
+    return gameOver_;
 }
 
 }

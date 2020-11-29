@@ -6,6 +6,11 @@
 #include "character.h"
 #include "actors/nysse.hh"
 
+
+QImage bigbackground = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
+QImage basicbackground = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
+
+
 namespace Students
 {
 
@@ -81,7 +86,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 bool City::isGameOver() const
 {
-    return gameStatus_;
+    return mw_->getGameOver();
 }
 
 bool City::takeMainWindow(std::shared_ptr<Students::BetterMainWindow> mainwindow)
@@ -90,8 +95,3 @@ bool City::takeMainWindow(std::shared_ptr<Students::BetterMainWindow> mainwindow
     return true;
 }
 }
-
-
-
-
-

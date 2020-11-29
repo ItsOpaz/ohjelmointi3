@@ -22,8 +22,6 @@
 const int X_ADJUST = 347;
 const int Y_ADJUST = 540;
 
-const int PADDING = 10;
-
 namespace Ui {
 class BetterMainWindow;
 }
@@ -53,6 +51,8 @@ public:
     std::vector<std::shared_ptr<Interface::IActor>> getActors();
     void game_over();
     statistics* get_stats();
+
+    int getGameOver() const;
 
 signals:
     void gameStarted();
@@ -84,6 +84,7 @@ private:
     int planesActive_ = 0;
     bool bombActive_ = false;
     double bombRadius;
+    int gameOver_ = false;
 
 };
 

@@ -16,6 +16,8 @@ private:
     std::unique_ptr<CourseSide::Logic> logic_;
     std::shared_ptr<Students::City> city_;
     std::shared_ptr<Students::BetterMainWindow> mainwindow_;
+    QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
+    QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
 };
 
 }
