@@ -1,0 +1,14 @@
+digraph "Students::gameover::split"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Students::gameover\l::split",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="splits string to vector on selected delimiter"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::gameover\l::display_highscores",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1gameover.html#a189a3a3b7305a661cdc67faa877c23da",tooltip="Saves current file's highscore data to a map and displays higscores in ListView widget."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::gameover\l::write_highscores",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1gameover.html#a2f82ebfcf0d07091c0d55d1f32893af2",tooltip="Tries to open a highscore file (.csv), if it does not exist, new one is generated...."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Students::gameover\l::gameover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1gameover.html#ae4bdc6a1d85c64b1dbdc68a367cfeafc",tooltip="Sets display widgets and selects correct higscore file."];
+}

@@ -1,0 +1,12 @@
+digraph "CourseSide::Logic::readOfflineData"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="CourseSide::Logic::\lreadOfflineData",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="readOfflineData uses OfflineReader class to read given offlinedata-files"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="CourseSide::Logic::\lfileConfig",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_course_side_1_1_logic.html#a0ad56bd09c3dbe242221cf4c09e8dee2",tooltip="fileConfig calls to read offlinedata"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="CourseSide::Logic::\lconfigChanged",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_course_side_1_1_logic.html#a4817108c919bd888b849375a9f8e92dd",tooltip="configChanged handles possible config parameters and calls fileconfig"];
+}

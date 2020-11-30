@@ -1,0 +1,10 @@
+digraph "Course" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_e6896a8a5f37dc8990fe861f004b1f70 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_e6896a8a5f37dc8990fe861f004b1f70.html"];
+    dir_e6896a8a5f37dc8990fe861f004b1f70 [shape=plaintext label="Course"];
+    dir_073dd5d248e348c36f44047f329142b1 [shape=box label="CourseLib" color="red" fillcolor="white" style="filled" URL="dir_073dd5d248e348c36f44047f329142b1.html"];
+  }
+}

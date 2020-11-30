@@ -1,0 +1,12 @@
+digraph "Students::Character::crash"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Students::Character\l::crash",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="emits damage_recieved"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::BetterMainWindow\l::explosion",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_better_main_window.html#ace06dea88eeeceba89914402c0797cd9",tooltip="conncted to bombexplosion in bomb class"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::Character\l::wallhit",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_character.html#a94c75bcb219ac34cc04a24160a27b151",tooltip="check if helicopter hits edge of map"];
+}

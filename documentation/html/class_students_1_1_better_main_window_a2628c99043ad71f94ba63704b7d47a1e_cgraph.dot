@@ -1,0 +1,24 @@
+digraph "Students::BetterMainWindow::BetterMainWindow"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Students::BetterMainWindow\l::BetterMainWindow",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::BetterMainWindow\l::addPowerup",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_better_main_window.html#a5b0805723fbc6db46d3454b243947b82",tooltip="adds bombable powerups to scene"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::statistics\l::get_lifes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1statistics.html#a794893ea889fe5d2bf24d798ae9ed04e",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Students::statistics\l::get_score",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1statistics.html#a13356a6468d93727ad3cf34d3fd7ddbe",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Students::statistics\l::getDifficulty",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1statistics.html#ae922d6f7aa5b01f3a073da2a62a2030a",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Students::BetterMainWindow\l::set_difficulty",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_better_main_window.html#ac9706b359d9a2464a916c3ff473196f2",tooltip="conneceted to startwindow info_set"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Students::statistics\l::set_info",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1statistics.html#a1b2c02d25f8d791d1556a457fc2947f5",tooltip=" "];
+  Node6 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Students::statistics\l::set_lifes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1statistics.html#ad8da4cec13c2bdfa3a0dcd9cb5bf8733",tooltip=" "];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="THEME",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bettermainwindow_8cpp.html#a5b4bae75f6d4549ffee045eec544c620",tooltip=" "];
+}

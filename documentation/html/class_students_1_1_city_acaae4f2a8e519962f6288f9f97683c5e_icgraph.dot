@@ -1,0 +1,14 @@
+digraph "Students::City::findActor"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Students::City::findActor",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="findActor checks if the given actor is in the city."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::City::actorMoved",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_city.html#abb4479255bb55aea1f90ad3cb9312ce0",tooltip="actorMoved is an operation that is used to tell wether certain actor has moved."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::City::actorRemoved",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_city.html#a4966952d977ece54490ce81742038021",tooltip="actorRemoved tells the city that actor is removed ingame."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Students::City::removeActor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_city.html#ae7e2279c6e34f922ea527f5e3ac17809",tooltip="removeActor removes the actor from the city."];
+}

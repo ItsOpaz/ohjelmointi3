@@ -1,0 +1,12 @@
+digraph "Students::Bomb::bombExplosion"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Students::Bomb::bombExplosion",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="explosion signal will be emited to slot bettermainwindow::explosion"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::Bomb::explode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_bomb.html#ad6260e04f4c7ec70554ab8adfb6a7ce6",tooltip="sets pixmap and emits bombExplosion"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::Bomb::tick",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_bomb.html#abed71a0438269bc74eea39aaee5f4531",tooltip="bomb phase will be adjusted every tick"];
+}

@@ -1,0 +1,10 @@
+digraph "Students::City::removeActor"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Students::City::removeActor",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="removeActor removes the actor from the city."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::City::findActor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_city.html#acaae4f2a8e519962f6288f9f97683c5e",tooltip="findActor checks if the given actor is in the city."];
+}

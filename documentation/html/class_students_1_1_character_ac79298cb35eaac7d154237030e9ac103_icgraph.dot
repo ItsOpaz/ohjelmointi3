@@ -1,0 +1,12 @@
+digraph "Students::Character::rotorPhase"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="Students::Character\l::rotorPhase",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="sets helicopter picture for every move so helicopter seems like it's flying"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::Character\l::Character",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_character.html#ad50119d061430f4582e63c914a514642",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::Character\l::move",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_character.html#a151e9fa18db03b25ba3e7d10ea025df1",tooltip=" "];
+}
