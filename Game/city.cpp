@@ -7,10 +7,6 @@
 #include "actors/nysse.hh"
 
 
-QImage bigbackground = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-QImage basicbackground = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
-
-
 namespace Students
 {
 
@@ -20,6 +16,7 @@ City::City():
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
+    Q_UNUSED(basicbackground;)
     mw_->setPicture(bigbackground);
 }
 
