@@ -13,6 +13,7 @@ startwindow::startwindow(QWidget *parent) :
     ui->setupUi(this);
     ui->pushButton_start->setDisabled(true);
     ui->label_errortext->hide();
+    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 }
 
 startwindow::~startwindow()
@@ -80,12 +81,12 @@ void Students::startwindow::on_radioButton_hard_clicked()
     setDifficulty("hard");
 }
 
-void Students::startwindow::on_pushButton_cancel_clicked()
-{
-    reject();
-}
-
 void Students::startwindow::on_radioButton_instakill_clicked()
 {
     setDifficulty("instakill");
+}
+
+void Students::startwindow::reject()
+{
+
 }
