@@ -5,6 +5,11 @@
 #include "bomb.h"
 #include <QObject>
 
+/**
+ *@file
+ * @brief Defines a class for playable characer
+ */
+
 //constants for checking wallhit
 const int HX_MIN = -165;
 const int HX_MAX = 905;

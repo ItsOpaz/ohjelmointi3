@@ -3,6 +3,11 @@
 
 #include <QGraphicsPixmapItem>
 
+/**
+ *@file
+ * @brief Defines a class for graphicsitems for stops and actors
+ */
+
 namespace Students {
 
 class BetterActorItem : public QGraphicsPixmapItem

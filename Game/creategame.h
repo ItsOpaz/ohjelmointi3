@@ -6,6 +6,12 @@
 #include "bettermainwindow.h"
 #include <QObject>
 
+/**
+ *@file
+ * @brief Defines a class for connecting logic, city and mainwindow correctly
+ */
+
+
 namespace Students {
 
 class CreateGame : public QObject

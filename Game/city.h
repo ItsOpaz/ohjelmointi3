@@ -6,6 +6,12 @@
 
 #include <QTime>
 
+/**
+ *@file
+ * @brief Defines a class for city inherited from ICity
+ */
+
+
 namespace Students {
 
 class City : public Interface::ICity

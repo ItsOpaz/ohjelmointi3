@@ -19,6 +19,11 @@
 #include <map>
 #include <QSound>
 
+/**
+ *@file
+ * @brief Defines a class for mainwindow
+ */
+
 const int X_ADJUST = 347;
 const int Y_ADJUST = 540;
 

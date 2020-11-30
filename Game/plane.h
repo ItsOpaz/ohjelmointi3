@@ -4,6 +4,12 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 
+/**
+ *@file
+ * @brief Defines a class for enemyplanes flying horizontally and vertically in scene
+ */
+
+
 const int X_MIN = 0;
 const int X_MAX = 1095;
 const int Y_MIN = 0;

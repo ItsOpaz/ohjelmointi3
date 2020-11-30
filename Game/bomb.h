@@ -4,8 +4,13 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 
+/**
+ *@file
+ * @brief Defines a class for bombs that player can drop
+ */
+
 namespace Students {
-class Bomb :public QObject, public QGraphicsPixmapItem
+class Bomb : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:

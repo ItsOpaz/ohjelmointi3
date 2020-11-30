@@ -2,6 +2,8 @@
 #include "plane.h"
 #include <QtDebug>
 
+namespace Students {
+
 Powerup::Powerup(int type) : type_(type)
 {
     int x = rand() % (X_MAX + X_MIN + 1) - X_MIN;
@@ -14,4 +16,5 @@ Powerup::Powerup(int type) : type_(type)
 int Powerup::getType() const
 {
     return type_;
+}
 }
