@@ -4,6 +4,7 @@
 #include <QDialog>
 
 /**
+ *@file
  * @brief Defines a start dialog window
  * Player can define player name and select difficulty, game cannot be started if name contains illegal symbols or difficulty is not set
  */

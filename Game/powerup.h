@@ -3,6 +3,14 @@
 
 #include <QGraphicsPixmapItem>
 
+/**
+ *@file
+ * @brief Defines a class for powerups
+ */
+
+
+namespace Students {
+
 class Powerup : public QGraphicsPixmapItem
 {
 public:
@@ -12,5 +20,6 @@ public:
 private:
     int type_;
 };
+}
 
 #endif // POWERUP_H
