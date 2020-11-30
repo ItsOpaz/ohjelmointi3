@@ -16,17 +16,29 @@ class Plane : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Plane();
-    //if plane flies out of map it will be removed and removePlane will be emitted
+
+    /**
+     * @brief if plane flies out of map it will be removed and removePlane will be emitted
+     * @return true if position is valid, false if position is out of map
+     */
     bool checkPos();
+    /**
+     * @brief sets plane status to destroyed and sets correct pixmap
+     */
     void destroy();
     bool status() const;
 
 signals:
-    //remove plane signal will emit to bettermainwindow planeremoved slot
+    /**
+     * @brief remove plane signal will emit to bettermainwindow planeremoved slot
+     * @param pointer to plane that will be removed
+     */
     void removePlane(Plane *);
 
 public slots:
-    //plane is moved every timer tick to correct direction
+    /**
+     * @brief plane is moved every timer tick to correct direction
+     */
     void move();
 
 private:

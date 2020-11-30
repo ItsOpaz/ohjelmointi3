@@ -10,18 +10,28 @@ class Bomb :public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Bomb(QPointF, qreal);
-    //sets pixmap and emits bombExplosion
+    /**
+     * @brief sets pixmap and emits bombExplosion
+     */
     void explode();
     bool status() const;
-    //radius for bomb is determined by difficulty
+    /**
+     * @brief radius for bomb is determined by difficulty
+     * @param value will be set to bombradius
+     */
     void setRadius(double value);
 
 public slots:
-    //bomb phase will be adjusted every tick
+    /**
+     * @brief bomb phase will be adjusted every tick
+     */
     void tick();
 
 signals:
-    //explosion signal will be emited to slot bettermainwindow::explosion
+    /**
+     * @brief explosion signal will be emited to slot bettermainwindow::explosion
+     * @param Bomb obect that explodes
+     */
     void bombExplosion(Bomb*);
 
 private:

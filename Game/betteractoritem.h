@@ -11,12 +11,18 @@ public:
     BetterActorItem(int, int, int, bool);
     virtual ~BetterActorItem();
     void setCoord(int, int);
-    //buss color will be determined by passengers inside
+    /**
+     * @brief buss color will be determined by passengers inside
+     */
     void setBusColor();
     int points() const;
-    //sets points for bus by passengers inside
+    /**
+     * @brief sets points for bus by passengers inside
+     */
     void setPoints(int);
-    //item is destroyed by bomb
+    /**
+     * @brief item is destroyed by bomb
+     */
     void destroy();
     int status() const;
 

@@ -20,20 +20,33 @@ public:
     void move();
     int direction() const;
     void setDirection(int);
-    //emits damage_recieved
+    /**
+     * @brief emits damage_recieved
+     */
     void crash();
-    //sets helicopter picture for every move so helicopter seems like it's flying
+    /**
+     * @brief sets helicopter picture for every move so helicopter seems like it's flying
+     */
     void rotorPhase();
-    //bomb is dropped
+    /**
+     * @brief bomb is dropped
+     * @return pointer to dropped bomb
+     */
     Bomb* dropBomb();
-    //check if helicopter hits edge of map
+    /**
+     * @brief check if helicopter hits edge of map
+     */
     void wallhit();
-    //helicopter gets upgraded to apache helicopter
+    /**
+     * @brief helicopter gets upgraded to apache helicopter
+     */
     void transfrom();
     int getType() const;
 
 signals:
-    //damage signal will be emitted to bettermainwindow slot damage_taken
+    /**
+     * @brief damage signal will be emitted to bettermainwindow slot damage_taken
+     */
     void damage_recieved();
 
 private:
