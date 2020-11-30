@@ -11,7 +11,7 @@ startwindow::startwindow(QWidget *parent) :
     ui(new Ui::startwindow)
 {
     ui->setupUi(this);
-    ui->pushButton->setDisabled(true);
+    ui->pushButton_start->setDisabled(true);
     ui->label_errortext->hide();
 }
 
@@ -24,10 +24,10 @@ void startwindow::setDifficulty(QString difficulty)
 {
     difficulty_ = difficulty;
     if (!check_name(playerName_)){
-        ui->pushButton->setDisabled(true);
+        ui->pushButton_start->setDisabled(true);
     }
     else{
-        ui->pushButton->setDisabled(false);
+        ui->pushButton_start->setDisabled(false);
     }
 }
 
@@ -49,16 +49,16 @@ void startwindow::on_lineEdit_playername_textChanged(const QString &arg1)
     playerName_ = arg1;
     if (check_name(playerName_) && difficulty_!=NULL){
         ui->label_errortext->hide();
-        ui->pushButton->setDisabled(false);
+        ui->pushButton_start->setDisabled(false);
     }
     else if (!check_name(playerName_)){
         ui->label_errortext->show();
-        ui->pushButton->setDisabled(true);
+        ui->pushButton_start->setDisabled(true);
     }
 }
 }
 
-void Students::startwindow::on_pushButton_clicked()
+void Students::startwindow::on_pushButton_start_clicked()
 {
     emit infoSet(playerName_, difficulty_);
     accept();

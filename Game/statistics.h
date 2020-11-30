@@ -1,8 +1,12 @@
 #ifndef STATISTICS_H
 #define STATISTICS_H
 #include "QString"
-
 #include <QObject>
+
+/**
+ *@file
+ * @brief Defines a class for saving statistics of current session
+ */
 
 namespace Students {
 
@@ -10,18 +14,25 @@ class statistics
 {
 public:
     statistics();
+
     void increase_score(int amount);
     void bomb_dropped();
+
+    //Increase ticks
     void tick_counter();
-    void read_highscore();
+
+    //Sets playername and difficulty
     void set_info(QString player_name, QString difficulty);
     void set_lifes(int);
+
+    //Get functions for values
     int get_bombs_amount();
     int get_time();
     int get_buses_destroyed();
     int get_lifes();
     std::pair<QString, int> get_score();
     QString getDifficulty() const;
+
     void reduce_lifes();
 
 private:

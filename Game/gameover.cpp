@@ -20,17 +20,16 @@ gameover::gameover(BetterMainWindow *parent) :
     stats_ = parent->get_stats();
     ui->lcdNumber_score->display(stats_->get_score().second);
     ui->lcdNumber_bombs->display(stats_->get_bombs_amount());
+
     model = new QStringListModel(this);
+
+    //Determine difficulty file
     QString diff = stats_->getDifficulty();
     filename_init_ = QString("highscores_%1.csv").arg(diff);
-    qDebug()<<filename_init_;
     filename_ = filename_init_.toStdString();
     ui->label_highscore->setText(QString("Higscores for %1").arg(diff));
 
-
-
     write_highscores();
-
 }
 
 gameover::~gameover()
@@ -77,7 +76,6 @@ void gameover::display_highscores()
 {
     std::ifstream file(filename_);
     std::string line;
-    qDebug() << QString::fromStdString(filename_);
     while (std::getline(file, line)) {
         std::vector<std::string> row = split(line, ',');
         QString row_name = QString::fromStdString(row.at(0));
@@ -89,7 +87,7 @@ void gameover::display_highscores()
 
     QList<QPair<QString, int>> sorted_highscores = sort_highscore(highscores_);
 
-    //Display score data stored in higscores map
+    //Display score data stored in sorted higscores list
     for (const auto &i : qAsConst(sorted_highscores)){
         QString listItem = i.first + ": " + QString::number(i.second);
         List << listItem;
@@ -101,14 +99,13 @@ void gameover::display_highscores()
 
 void gameover::write_highscores()
 {
-
-
     std::fstream file;
-    file.open(filename_, std::ios_base::app);
-    qDebug() << QString::fromStdString(filename_);
 
+    //Open file in append mode
+    file.open(filename_, std::ios_base::app);
+
+    //Determine if there is already a file for selected difficulty
     if (!file.is_open()) {
-        qDebug() << "new file";
         std::ofstream file(filename_);
         std::string name = stats_->get_score().first.toStdString();
         int score = stats_->get_score().second;

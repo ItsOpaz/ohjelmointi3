@@ -24,11 +24,6 @@ void Students::statistics::tick_counter()
     ticks_++;
 }
 
-void Students::statistics::read_highscore()
-{
-
-}
-
 void Students::statistics::set_info(QString player_name, QString difficulty)
 {
     player_name_ = player_name;
