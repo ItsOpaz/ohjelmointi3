@@ -80,9 +80,9 @@ void GameTest::check_score(){
 
 void GameTest::add_ticks(){
     Students::statistics stats;
-    QCOMPARE(stats.get_time(), 0u);
+    QCOMPARE(stats.get_time(), 0);
     stats.tick_counter();
-    QCOMPARE(stats.get_time(), 1u);
+    QCOMPARE(stats.get_time(), 1);
 }
 
 void GameTest::drop_bomb(){

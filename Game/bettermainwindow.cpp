@@ -57,6 +57,7 @@ BetterMainWindow::BetterMainWindow(QWidget *parent) :
         }else if(stats_->getDifficulty() == "medium"){
             addPowerup(2);
         }
+
     }
     else{
         qApp->quit();
@@ -323,6 +324,10 @@ void BetterMainWindow::keyPressEvent(QKeyEvent *event)
         }
         break;
         }
+    case Qt::Key_R:{
+        ui->gameView->rotate(90);
+        break;
+    }
     //esc closes mainwindow
     case Qt::Key_Escape:{
         close();
@@ -383,3 +388,5 @@ int BetterMainWindow::getGameOver() const
 }
 
 }
+
+

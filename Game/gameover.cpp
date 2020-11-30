@@ -113,7 +113,6 @@ void gameover::write_highscores()
         file.close();
         highscores_[QString::fromStdString(name)] = score;
     }else if (file.is_open()){
-        qDebug() << "file opened";
         QString name = stats_->get_score().first;
 
         //Write new score to file
