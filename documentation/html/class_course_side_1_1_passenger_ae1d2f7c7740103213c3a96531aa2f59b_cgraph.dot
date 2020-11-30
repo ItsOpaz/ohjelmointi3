@@ -1,0 +1,12 @@
+digraph "CourseSide::Passenger::move"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="CourseSide::Passenger\l::move",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="move-method moves the actor to given location."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="CourseSide::Passenger\l::giveLocation",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_course_side_1_1_passenger.html#ade3c2fb1d7b5a31a6c19926c1f733362",tooltip="giveLocation returns the location of the actor."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="CourseSide::Passenger\l::isInVehicle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_course_side_1_1_passenger.html#a6ef7fe0540fd26f846492dd7bf913972",tooltip="isInVehicle tells if passenger is in any vehicle currently."];
+}

@@ -1,0 +1,12 @@
+digraph "Interface::Location::calcDistance"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Interface::Location\l::calcDistance",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="calcDistance calculates the distance between two locations in map grid."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Interface::Location\l::giveEasternCoord",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_location.html#ad3f5fd16f14aae62f2dd20f5fde1804d",tooltip="giveEasternCoord returns the location of the eastern coordinate from map grid."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Interface::Location\l::giveNorthernCoord",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_location.html#af17690bb42890e10529389a6bdce6991",tooltip="giveNorthernCoord returns the location of the northern coordinate from map grid."];
+}

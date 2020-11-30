@@ -1,0 +1,16 @@
+digraph "Students::gameover::write_highscores"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Students::gameover\l::write_highscores",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Tries to open a highscore file (.csv), if it does not exist, new one is generated...."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::gameover\l::display_highscores",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1gameover.html#a189a3a3b7305a661cdc67faa877c23da",tooltip="Saves current file's highscore data to a map and displays higscores in ListView widget."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::gameover\l::sort_highscore",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1gameover.html#add630c1a9f5ac7f765f2a0444f47fc25",tooltip="saves QMap to a QList and sorts that list descending according to QPair second"];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Students::gameover\l::split",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1gameover.html#a73462abff7bb12dbc1f303864007c424",tooltip="splits string to vector on selected delimiter"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Students::statistics\l::get_score",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1statistics.html#a13356a6468d93727ad3cf34d3fd7ddbe",tooltip=" "];
+}

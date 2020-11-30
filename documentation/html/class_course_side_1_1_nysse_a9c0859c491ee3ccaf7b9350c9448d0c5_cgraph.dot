@@ -1,0 +1,16 @@
+digraph "CourseSide::Nysse::moveToNextPosition"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="CourseSide::Nysse::\lmoveToNextPosition",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Interface::Location\l::calcBetween",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_location.html#a1bd79f247bb7783c57ece45c6065c537",tooltip="calcBetween calculates wanted position between two locations."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Interface::Location\l::giveEasternCoord",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_location.html#ad3f5fd16f14aae62f2dd20f5fde1804d",tooltip="giveEasternCoord returns the location of the eastern coordinate from map grid."];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Interface::Location\l::giveNorthernCoord",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_location.html#af17690bb42890e10529389a6bdce6991",tooltip="giveNorthernCoord returns the location of the northern coordinate from map grid."];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Interface::Location\l::Location",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_location.html#ad46bb78e1bc5de791d4e77c9f46453d4",tooltip="Default constructor."];
+}

@@ -1,0 +1,16 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="Interface::IActor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_i_actor.html",tooltip="ActorIF is an interface, which every single actor moving in the game implements."];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="Interface::IPassenger",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_i_passenger.html",tooltip="PassengerIF is an interface which every passenger in game implements."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="CourseSide::Passenger",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_course_side_1_1_passenger.html",tooltip=" "];
+  Node0 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Interface::IVehicle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface_1_1_i_vehicle.html",tooltip="VehicleIF is an interface that describes vehicles (nysse) in game."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="CourseSide::Nysse",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_course_side_1_1_nysse.html",tooltip=" "];
+}

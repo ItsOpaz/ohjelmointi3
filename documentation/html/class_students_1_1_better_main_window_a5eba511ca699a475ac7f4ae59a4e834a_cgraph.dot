@@ -1,0 +1,16 @@
+digraph "Students::BetterMainWindow::addPlane"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Students::BetterMainWindow\l::addPlane",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="adds enemyplanes to scene"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Students::Plane::move",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_plane.html#a18649ccdb0616ef40ae76c6cda4d8628",tooltip="plane is moved every timer tick to correct direction"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Students::Plane::checkPos",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_plane.html#a2cd11f9c98f5a7581a8a5d9e88e2d83c",tooltip="if plane flies out of map it will be removed and removePlane will be emitted"];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Students::Plane::status",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_plane.html#ad69857828f51a12a3ee145d2e541b9ee",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Students::BetterMainWindow\l::planeRemoved",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_students_1_1_better_main_window.html#a622f7fc06d942b6a4de63fb526682a67",tooltip="connected to remove plane in plane class"];
+}

@@ -1,0 +1,12 @@
+digraph "Course/CourseLib/interfaces" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_073dd5d248e348c36f44047f329142b1 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="CourseLib" fontname="Helvetica", fontsize="10", URL="dir_073dd5d248e348c36f44047f329142b1.html"]
+  dir_31ecbf5764a97f048ee4b40f23fa60f9 [shape=box, label="interfaces", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_31ecbf5764a97f048ee4b40f23fa60f9.html"];
+  }
+  dir_f0c2f1e2669e4839cf697743412b9102 [shape=box label="core" URL="dir_f0c2f1e2669e4839cf697743412b9102.html"];
+  dir_31ecbf5764a97f048ee4b40f23fa60f9->dir_f0c2f1e2669e4839cf697743412b9102 [headlabel="1", labeldistance=1.5 headhref="dir_000006_000003.html"];
+  dir_f0c2f1e2669e4839cf697743412b9102->dir_31ecbf5764a97f048ee4b40f23fa60f9 [headlabel="1", labeldistance=1.5 headhref="dir_000003_000006.html"];
+}
